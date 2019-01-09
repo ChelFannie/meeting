@@ -53,91 +53,6 @@
           :autosize="{true: item.type==='textarea'}"
           @click="showSelectArea(item.vModle)"
         />
-        <!-- <van-field
-          v-model="meetingContents.username"
-          label="真实姓名"
-          placeholder="请输入真实姓名"
-          readonly
-        />
-        <van-field
-          v-model="meetingContents.tel"
-          type="tel"
-          label="手机号码"
-          placeholder="请输入真实手机号码"
-          readonly
-        />
-        <van-field
-          v-model="meetingContents.wechat"
-          label="微信号"
-          placeholder="请输入微信号"
-        /> -->
-        <!-- <div class="cel-date">
-          <div class="cel-data-main">
-            <span class="date-label">会议时间</span>
-            <div class="date-content">
-              <input
-                v-model="startDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="开始时间"
-                @click="showDate('startDate')" />
-              <span class="date-interval">—</span>
-              <input
-                v-model="endDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="结束时间"
-                @click="showDate('endDate')" />
-            </div>
-          </div>
-        </div> -->
-        <!-- <van-field
-          v-model="meetingContents.address"
-          readonly
-          label="会议地点"
-          placeholder="请选择会议地点"
-          @click="showAddressEdit = true"
-          icon="arrow"
-        /> -->
-        <!-- <van-field
-          v-model="meetingContents.detailAddress"
-          label="详细地址"
-          placeholder="可选填"
-          type="textarea"
-          rows="1"
-          autosize
-        /> -->
-        <!-- <van-field
-          v-model="meetingContents.nature"
-          readonly
-          label="会议性质"
-          placeholder="请选择会议性质"
-          icon="arrow"
-          @click="showNature = true"
-        />
-        <van-field
-          ref="message"
-          class="field-message"
-          v-model="meetingContents.message"
-          label="会议情况"
-          type="textarea"
-          placeholder="请详细输入会议背景情况"
-          rows="1"
-          autosize
-        />
-        <van-field
-          v-model="meetingContents.numbers"
-          label="参会人数"
-          placeholder="请输入参会人数"
-        />
-        <van-field
-          v-model="meetingContents.lecturer"
-          label="讲师选择"
-          placeholder="请选择讲师"
-          icon="arrow"
-        /> -->
       </van-cell-group>
 
       <!-- 地址选择器 -->
@@ -158,7 +73,7 @@
         />
       </van-actionsheet>
 
-      <!-- 会议性质 -->
+      <!-- 会议性质选择 -->
       <van-actionsheet
         v-model="showNature"
         :actions="natureActions"
@@ -284,10 +199,11 @@ export default {
       this.meetingContents.nature = item.name
       this.showNature = false
     },
-    // 提交申请
+    // 验证并确认会议申请
     applyCommit () {
       this.showConfirm = true
     },
+    // 提交会议申请
     applyMeeting () {}
   }
 }
@@ -302,49 +218,12 @@ export default {
       border-top: none;
     }
     // 调整单元格样式
-    .van-cell-group{
-      background: #f7f7f7;
-      .van-field{
-        &:nth-of-type(3), &:nth-of-type(6){
-          margin-bottom: 20px;
-        }
-        .van-cell__title{
-          max-width: 130px;
-          font-size: 28px;
-        }
-        .van-cell__value{
-          color: #999999FF;
-          .van-field__body{
-            .van-field__control{
-              min-height: 30px;// 必须写，用于调整textarea的行高
-            }
-            .van-field__icon{
-              padding: 0;
-              .van-icon{
-                font-size: 36px;
-              }
-            }
-          }
-        }
-      }
-      .van-cell{
-        display: flex;
-        // flex-direction: row;
-        // align-items: center;
-        width: 100%;
-        padding: 25px 30px;
-        line-height: 45px;// 必须写，用于调整textarea的行高
-        background-color: #fff;
-        color: rgba(51,51,51);
-        font-size: 28px;
-        &:not(:last-child):after{
-          border-color: rgba(242, 242, 242)
-        }
+    .van-field{
+      &:nth-of-type(3),
+      &:nth-of-type(6) {
+        margin-bottom: 20px;
       }
     }
-    // .cell-main{
-    //   margin-bottom: 20px;
-    // }
     .van-picker__toolbar{
       height: 80px;
       line-height: 80px;
