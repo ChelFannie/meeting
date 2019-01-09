@@ -202,9 +202,6 @@ export default {
   min-height: 100vh;
   .apply-content{
     width: 100%;
-    [class*=van-hairline]:after{
-      border-top: none;
-    }
     // 调整单元格样式
     .van-field{
       &:nth-of-type(3),

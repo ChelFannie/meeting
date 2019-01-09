@@ -41,6 +41,10 @@ export default {
 </script>
 <style lang="less">
 .i-filed{
+  // 去掉van-cell-group上下边框
+  [class*=van-hairline]:after{
+    border-top: none;
+  }
   .van-cell-group {
     background: #f7f7f7;
     .van-field {
