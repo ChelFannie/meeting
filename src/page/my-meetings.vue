@@ -50,7 +50,7 @@ export default {
   mounted () {},
   methods: {
     goDetail () {
-      console.log(222222)
+      this.$router.push('/meeting-detail')
     }
   }
 }

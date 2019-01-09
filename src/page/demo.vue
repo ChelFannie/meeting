@@ -1,15 +1,6 @@
 <template>
   <div class="demo">
-    <van-cell-group>
-      <van-field
-        v-model="message"
-        label="留言"
-        type="textarea"
-        placeholder="请输入留言"
-        rows="1"
-        autosize
-      />
-    </van-cell-group>
+    demo
   </div>
 </template>
 <script>
