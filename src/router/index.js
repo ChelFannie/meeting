@@ -1,0 +1,33 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+const Home = () => import('../page/home')
+const ApplyMeeting = () => import('../page/apply-meeting')
+const MyMeetings = () => import('../page/my-meetings')
+const Demo = () => import('../page/demo')
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    }, {
+      path: '/home',
+      name: 'home',
+      component: Home
+    }, {
+      path: '/apply-meeting',
+      name: 'apply-meeting',
+      component: ApplyMeeting
+    }, {
+      path: '/my-meetings',
+      name: 'my-meetings',
+      component: MyMeetings
+    }, {
+      path: '/demo',
+      name: 'demo',
+      component: Demo
+    }
+  ]
+})
