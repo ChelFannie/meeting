@@ -3,57 +3,30 @@
     <i-header text="申请会议"></i-header>
 
     <div class="apply-content">
-      <van-cell-group>
-        <van-field
-          v-for="(item, index) in fieldLists"
-          :key="index"
-          v-if="index < 3"
-          v-model="meetingContents[item.vModle]"
-          :type="item.type"
-          :label="item.label"
-          :placeholder="item.placeholder"
-          :icon="item.icon"
-          :readonly="item.readonly"
-          rows="1"
-          :autosize="{true: item.type==='textarea'}"
-        />
-        <div class="cel-date">
-          <div class="cel-data-main">
-            <span class="date-label">会议时间</span>
-            <div class="date-content">
-              <input
-                v-model="startDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="开始时间"
-                @click="showDate('startDate')" />
-              <span class="date-interval">—</span>
-              <input
-                v-model="endDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="结束时间"
-                @click="showDate('endDate')" />
-            </div>
+      <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
+      <div class="cel-date">
+        <div class="cel-data-main">
+          <span class="date-label">会议时间</span>
+          <div class="date-content">
+            <input
+              v-model="startDate"
+              readonly
+              class="date-input"
+              type="text"
+              placeholder="开始时间"
+              @click="showDate('startDate')" />
+            <span class="date-interval">—</span>
+            <input
+              v-model="endDate"
+              readonly
+              class="date-input"
+              type="text"
+              placeholder="结束时间"
+              @click="showDate('endDate')" />
           </div>
         </div>
-        <van-field
-          v-for="(item, index) in fieldLists"
-          :key="index"
-          v-if="index >= 3"
-          v-model="meetingContents[item.vModle]"
-          :type="item.type"
-          :label="item.label"
-          :placeholder="item.placeholder"
-          :icon="item.icon"
-          :readonly="item.readonly"
-          rows="1"
-          :autosize="{true: item.type==='textarea'}"
-          @click="showSelectArea(item.vModle)"
-        />
-      </van-cell-group>
+      </div>
+      <i-filed :fieldLists="fieldListsAfter" :meetingContents="meetingContents"></i-filed>
 
       <!-- 地址选择器 -->
       <van-actionsheet v-model="showAddressEdit">
@@ -103,12 +76,14 @@
 </template>
 <script>
 import IHeader from '../components/i-header'
+import IFiled from '../components/i-filed'
 import {addressObj} from '../utils/address.js'
 import formatDateTime from '../utils/formateDate.js'
 export default {
   name: 'apply-meeting',
   components: {
-    IHeader
+    IHeader,
+    IFiled
   },
   data () {
     return {
@@ -125,6 +100,7 @@ export default {
         numbers: '',
         lecturer: ''
       },
+      // 列表选项
       fieldLists: [
         {vModle: 'username', type: 'text', label: '真实姓名', placeholder: '请输入真实姓名', icon: '', readonly: true},
         {vModle: 'tel', type: 'tel', label: '手机号码', placeholder: '请输入真实手机号码', icon: '', readonly: true},
@@ -136,6 +112,10 @@ export default {
         {vModle: 'numbers', type: 'number', label: '参会人数', placeholder: '请输入参会人数', icon: '', readonly: false},
         {vModle: 'lecturer', type: 'text', label: '讲师选择', placeholder: '请选择讲师', icon: 'arrow', readonly: true}
       ],
+      // 列表前三个选项
+      fieldListBefore: [],
+      // 列表后几个选项
+      fieldListsAfter: [],
       // 展示地址选择器
       showAddressEdit: false,
       // 地址所有数据
@@ -164,7 +144,15 @@ export default {
     }
   },
   created () {},
-  mounted () {},
+  mounted () {
+    this.fieldLists.map((item, index) => {
+      if (index < 3) {
+        this.fieldListBefore.push(item)
+      } else {
+        this.fieldListsAfter.push(item)
+      }
+    })
+  },
   methods: {
     // 展示选中列表
     showSelectArea (vModle) {
