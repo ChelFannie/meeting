@@ -1,64 +1,69 @@
 <template>
   <div class="apply-meeting">
-    <i-header text="申请会议"></i-header>
+    <div v-if="!selectLecturer">
+      <i-header text="申请会议"></i-header>
 
-    <div class="apply-content">
-      <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
-      <div class="cel-date">
-        <div class="cel-data-main">
-          <span class="date-label">会议时间</span>
-          <div class="date-content">
-            <input
-              v-model="startDate"
-              readonly
-              class="date-input"
-              type="text"
-              placeholder="开始时间"
-              @click="showDate('startDate')" />
-            <span class="date-interval">—</span>
-            <input
-              v-model="endDate"
-              readonly
-              class="date-input"
-              type="text"
-              placeholder="结束时间"
-              @click="showDate('endDate')" />
+      <div class="apply-content">
+        <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
+        <div class="cel-date">
+          <div class="cel-data-main">
+            <span class="date-label">会议时间</span>
+            <div class="date-content">
+              <input
+                v-model="startDate"
+                readonly
+                class="date-input"
+                type="text"
+                placeholder="开始时间"
+                @click="showDate('startDate')" />
+              <span class="date-interval">—</span>
+              <input
+                v-model="endDate"
+                readonly
+                class="date-input"
+                type="text"
+                placeholder="结束时间"
+                @click="showDate('endDate')" />
+            </div>
           </div>
         </div>
-      </div>
-      <i-filed :fieldLists="fieldListsAfter" :meetingContents="meetingContents"></i-filed>
+        <i-filed :fieldLists="fieldListsAfter" :meetingContents="meetingContents" @select="showSelectArea"></i-filed>
 
-      <!-- 地址选择器 -->
-      <van-actionsheet v-model="showAddressEdit">
-        <van-area
-          :area-list="areaList"
-          @confirm="selectArea"
-          @cancel="showAddressEdit = false" />
-      </van-actionsheet>
+        <!-- 地址选择器 -->
+        <van-actionsheet v-model="showAddressEdit">
+          <van-area
+            :area-list="areaList"
+            @confirm="selectArea"
+            @cancel="showAddressEdit = false" />
+        </van-actionsheet>
 
-      <!-- 时间选择器 -->
-      <van-actionsheet v-model="showDateEdit">
-        <van-datetime-picker
-          type="date"
-          :min-date="minDate"
-          @confirm="selectCurrentDate"
-          @cancel="showDateEdit = false"
+        <!-- 时间选择器 -->
+        <van-actionsheet v-model="showDateEdit">
+          <van-datetime-picker
+            type="date"
+            :min-date="minDate"
+            @confirm="selectCurrentDate"
+            @cancel="showDateEdit = false"
+          />
+        </van-actionsheet>
+
+        <!-- 会议性质选择 -->
+        <van-actionsheet
+          v-model="showNature"
+          :actions="natureActions"
+          cancel-text="取消"
+          @select="onSelect"
+          @cancel="showNature = false"
         />
-      </van-actionsheet>
+      </div>
 
-      <!-- 会议性质选择 -->
-      <van-actionsheet
-        v-model="showNature"
-        :actions="natureActions"
-        cancel-text="取消"
-        @select="onSelect"
-        @cancel="showNature = false"
-      />
+      <div class="apply-bottom">
+        <button class="cancel apply-btn">取消</button>
+        <button class="confirm apply-btn" @click="applyCommit">确认</button>
+      </div>
     </div>
 
-    <div class="apply-bottom">
-      <button class="cancel apply-btn">取消</button>
-      <button class="confirm apply-btn" @click="applyCommit">确认</button>
+    <div v-else>选择头像
     </div>
 
     <!-- 提交申请提示框 -->
@@ -139,8 +144,11 @@ export default {
       ],
       // 展示会议性质选项卡
       showNature: false,
+      // 提交申请提示框
       showConfirm: false,
-      confirmApplyMsg: '确认信息无误后将提交申请并支付保证金'
+      confirmApplyMsg: '确认信息无误后将提交申请并支付保证金',
+      // 展示选择讲师
+      selectLecturer: false
     }
   },
   created () {},
@@ -161,7 +169,7 @@ export default {
       } else if (vModle === 'nature') {
         this.showNature = true
       } else if (vModle === 'lecturer') {
-        console.log(111111)
+        this.selectLecturer = true
       }
     },
     // 选中地址

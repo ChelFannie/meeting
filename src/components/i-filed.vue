@@ -12,6 +12,7 @@
         :readonly="item.readonly"
         rows="1"
         :autosize="{true: item.type==='textarea'}"
+        @click="select(item.vModle)"
       />
     </van-cell-group>
   </div>
@@ -36,7 +37,11 @@ export default {
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    select (vModle) {
+      this.$emit('select', vModle)
+    }
+  }
 }
 </script>
 <style lang="less">
