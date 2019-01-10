@@ -129,6 +129,7 @@ export default {
       showDateEdit: false,
       // 时间选择器的起始时间
       minDate: new Date(),
+      // maxDate: new Date(2019, 10, 1),
       // 开始时间
       startDate: '',
       // 结束时间
@@ -151,8 +152,26 @@ export default {
       selectLecturer: false
     }
   },
+  watch: {
+    startOrEndDate: {
+      handler: function (val) {
+        if (val === 'startDate') {
+          this.minDate = new Date()
+        } else if (val === 'endDate') {
+          if (this.meetingContents['startDate']) {
+            let date = this.meetingContents['startDate'].split('/')
+            this.minDate = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]))
+          } else {
+            this.minDate = new Date()
+          }
+        }
+      },
+      deep: true
+    }
+  },
   created () {},
   mounted () {
+    // 截取单元格渲染范围
     this.fieldLists.map((item, index) => {
       if (index < 3) {
         this.fieldListBefore.push(item)
@@ -181,6 +200,7 @@ export default {
       this.meetingContents.address = addressStr
       this.showAddressEdit = false
     },
+    // 选择时间
     selectCurrentDate (selectDate) {
       this.meetingContents[this.startOrEndDate] = formatDateTime(selectDate)
       this[this.startOrEndDate] = formatDateTime(selectDate)
