@@ -77,6 +77,7 @@
       cancel-button-text="取消"
       @confirm="applyMeeting"
     ></van-dialog>
+
   </div>
 </template>
 <script>
@@ -147,7 +148,7 @@ export default {
       showNature: false,
       // 提交申请提示框
       showConfirm: false,
-      confirmApplyMsg: '确认信息无误后将提交申请并支付保证金',
+      confirmApplyMsg: '确认信息无误后将提交申请',
       // 展示选择讲师
       selectLecturer: false
     }

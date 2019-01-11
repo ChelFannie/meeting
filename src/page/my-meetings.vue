@@ -1,54 +1,90 @@
 <template>
   <div class="my-meetings">
     <i-header text="我的会议"></i-header>
-    <div class="tabs-main">
-      <van-tabs v-model="activeTabs" sticky animated>
+
+    <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
+
+    <div v-if="true" class="tabs-main">
+      <van-tabs v-model="activeTabs" animated>
         <van-tab v-for="(tab, index) in tabsList" :title="tab" :key="index">
           <div class="tab-item">
+
             <meeting-info @go-detail="goDetail">
-              <div v-if="index===1" slot="container">
-                <van-steps :active="activeStep">
-                  <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
-                </van-steps>
+              <div v-if="index===1">
+                <div slot="container">
+                  <van-steps :active="activeStep">
+                    <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
+                  </van-steps>
+                </div>
+
+                <div class="bottom-btn audit-btn">
+                  <button class="audit btn">申请退款</button>
+                </div>
               </div>
+
               <div v-if="index===0" class="bottom-btn">
                 <button class="pay pay-cancel btn">取消申请</button>
                 <button class="pay btn">支付保证金</button>
               </div>
-              <div v-if="index===1" class="bottom-btn audit-btn">
-                <button class="audit btn">申请退款</button>
-              </div>
+
               <div v-if="index===2" class="bottom-btn">
                 <span class="list-status">会议状态：已结束</span>
                 <button class="audit btn">申请退款</button>
               </div>
             </meeting-info>
+
           </div>
         </van-tab>
       </van-tabs>
     </div>
+
+    <div class="bottom">
+      <i-footer text="申请会议" @show="showConditions = true"></i-footer>
+    </div>
+
+    <!-- 申请会议条款 -->
+    <van-dialog
+      v-model="showConditions"
+      show-cancel-button
+      closeOnClickOverlay
+      title="条款"
+      :message="message"
+      confirm-button-text="接受"
+      cancel-button-text="不接受"
+      @confirm="acceptConditions"
+    ></van-dialog>
+
   </div>
 </template>
 <script>
 import IHeader from '../components/i-header'
+import IFooter from '../components/i-footer'
 import MeetingInfo from '../components/meeting-info'
 export default {
   name: 'my-meetings',
   components: {
     IHeader,
-    MeetingInfo
+    MeetingInfo,
+    IFooter
   },
   data () {
     return {
       activeTabs: 0,
       tabsList: ['待支付', '审批中', '会议列表'],
       activeStepList: ['核实信息', '市场评定', '审批完成'],
-      activeStep: 1
+      activeStep: 1,
+      showConditions: false,
+      message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内'
     }
   },
   created () {},
   mounted () {},
   methods: {
+    // 接受条款
+    acceptConditions () {
+      this.$router.push('/apply-meeting')
+    },
+    // 会议详情页
     goDetail () {
       this.$router.push('/meeting-detail')
     }
@@ -57,7 +93,14 @@ export default {
 </script>
 <style lang="less">
 .my-meetings{
+  .no-meeting{
+    margin-top: 80px;
+    font-size: 32px;
+    text-align: center;
+    color: #333333;
+  }
   .tabs-main{
+    margin-bottom: 120px;
     .van-tabs--line{
       padding-top: 100px;
     }

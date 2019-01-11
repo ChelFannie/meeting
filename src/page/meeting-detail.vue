@@ -5,17 +5,37 @@
     <div class="content">
       <i-filed :fieldLists="fieldLists" :meetingContents="meetingContents"></i-filed>
     </div>
+
+    <div class="bottom">
+      <i-footer text="取消会议" @show="showTips = true"></i-footer>
+    </div>
+
+    <!-- 申请会议条款 -->
+    <van-dialog
+      v-model="showTips"
+      show-cancel-button
+      closeOnClickOverlay
+      messageAlign="left"
+      title="确定要取消会议吗？"
+      :message="message"
+      confirm-button-text="残忍退款"
+      cancel-button-text="取消"
+      @confirm="returnMoney"
+    ></van-dialog>
+
   </div>
 </template>
 <script>
 import IHeader from '../components/i-header'
 import IFiled from '../components/i-filed'
+import IFooter from '../components/i-footer'
 
 export default {
   name: 'meeting-detail',
   components: {
     IHeader,
-    IFiled
+    IFiled,
+    IFooter
   },
   data () {
     return {
@@ -39,12 +59,23 @@ export default {
         {vModle: 'message', type: 'textarea', label: '会议情况', placeholder: '', icon: '', readonly: true},
         {vModle: 'numbers', type: 'number', label: '参会人数', placeholder: '', icon: '', readonly: true},
         {vModle: 'lecturer', type: 'text', label: '讲师选择', placeholder: '', icon: '', readonly: true}
-      ]
+      ],
+      // 展示取消会议提示框
+      showTips: false,
+      message: '因自身原因取消会议需3个工作日审核，审核通过可退还保证金!'
     }
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    // 退款
+    returnMoney () {
+      this.showTips = false
+      this.$toast.success({
+        message: '取消成功'
+      })
+    }
+  }
 }
 </script>
 <style lang="less">

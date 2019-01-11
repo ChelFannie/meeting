@@ -18,7 +18,8 @@ import {
   Tab,
   Tabs,
   Step,
-  Steps
+  Steps,
+  Toast
 } from 'vant'
 
 Vue.use(Button)
@@ -31,6 +32,7 @@ Vue.use(Actionsheet)
 Vue.use(DatetimePicker)
 Vue.use(Tab).use(Tabs)
 Vue.use(Step).use(Steps)
+Vue.use(Toast)
 
 // 路由全局守卫
 // router.beforeEach((to, from, next) => {

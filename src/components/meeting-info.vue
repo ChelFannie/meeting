@@ -17,8 +17,10 @@
             <span>讲师：大斌</span>
           </p>
         </div>
+
         <slot name="container"></slot>
       </div>
+
       <slot></slot>
     </div>
   </div>

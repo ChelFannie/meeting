@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/my-meetings'
     }, {
       path: '/home',
       name: 'home',
