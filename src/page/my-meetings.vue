@@ -12,7 +12,7 @@
             <meeting-info v-if="index===0" @go-detail="goDetail">
               <div v-if="index===0" class="bottom-btn">
                 <button class="pay pay-cancel btn">取消申请</button>
-                <button class="pay btn">支付保证金</button>
+                <button class="pay btn" @click="payDeposit">支付保证金</button>
               </div>
             </meeting-info>
 
@@ -59,6 +59,7 @@ import IHeader from '../components/i-header'
 import IFooter from '../components/i-footer'
 import ISteps from '../components/i-steps'
 import MeetingInfo from '../components/meeting-info'
+
 export default {
   name: 'my-meetings',
   components: {
@@ -87,6 +88,10 @@ export default {
     // 会议详情页
     goDetail () {
       this.$router.push('/meeting-detail')
+    },
+    // 支付保证金
+    payDeposit () {
+      this.$router.push('/pay-deposit')
     }
   }
 }

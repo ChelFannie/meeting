@@ -4,6 +4,7 @@ const Home = () => import('../page/home')
 const ApplyMeeting = () => import('../page/apply-meeting')
 const MyMeetings = () => import('../page/my-meetings')
 const MeetingDetail = () => import('../page/meeting-detail')
+const PayDeposit = () => import('../page/pay-deposit')
 const Demo = () => import('../page/demo')
 
 Vue.use(Router)
@@ -29,6 +30,10 @@ export default new Router({
       path: '/meeting-detail',
       name: 'meeting-detail',
       component: MeetingDetail
+    }, {
+      path: '/pay-deposit',
+      name: 'pay-deposit',
+      component: PayDeposit
     }, {
       path: '/demo',
       name: 'demo',
