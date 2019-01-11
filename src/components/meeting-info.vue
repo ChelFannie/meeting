@@ -2,7 +2,7 @@
   <div class="meeting-info">
     <div class="top" @click="goDetail">
       <p class="top-time">申请时间：2019-01-01 10:30:36</p>
-      <van-icon name="arrow" />
+      <van-icon v-if="icon" name="arrow" />
     </div>
     <div class="container">
       <div class="container-line">
@@ -28,6 +28,12 @@
 <script>
 export default {
   name: 'meeting-info',
+  props: {
+    icon: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {}
   },
@@ -65,7 +71,7 @@ export default {
     .container-line{
       border-bottom: 1px solid rgba(242,242,242);
       font-size: 28px;
-      color: rgba(102,102,102,1);
+      color: #333333;
       .container-line-item{
         padding: 0 30px;
         .item-content{
