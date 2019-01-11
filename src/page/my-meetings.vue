@@ -9,30 +9,30 @@
         <van-tab v-for="(tab, index) in tabsList" :title="tab" :key="index">
           <div class="tab-item">
 
-            <meeting-info @go-detail="goDetail">
-              <div v-if="index===1">
-                <div slot="container">
-                  <van-steps :active="activeStep">
-                    <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
-                  </van-steps>
-                </div>
-
-                <div class="bottom-btn audit-btn">
-                  <button class="audit btn">申请退款</button>
-                </div>
-              </div>
-
+            <meeting-info v-if="index===0" @go-detail="goDetail">
               <div v-if="index===0" class="bottom-btn">
                 <button class="pay pay-cancel btn">取消申请</button>
                 <button class="pay btn">支付保证金</button>
               </div>
+            </meeting-info>
 
-              <div v-if="index===2" class="bottom-btn">
-                <span class="list-status">会议状态：已结束</span>
+            <meeting-info v-if="index===1" @go-detail="goDetail">
+              <div slot="container">
+                <van-steps :active="activeStep">
+                  <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
+                </van-steps>
+              </div>
+              <div class="bottom-btn audit-btn">
                 <button class="audit btn">申请退款</button>
               </div>
             </meeting-info>
 
+            <meeting-info v-if="index===2" @go-detail="goDetail">
+              <div class="bottom-btn">
+                <span class="list-status">会议状态：已结束</span>
+                <button class="audit btn">申请退款</button>
+              </div>
+            </meeting-info>
           </div>
         </van-tab>
       </van-tabs>
