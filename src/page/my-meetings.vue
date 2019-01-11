@@ -5,6 +5,8 @@
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
     <div v-if="true" class="tabs-main">
+      <div @click="showTypes = true">选择</div>
+
       <meeting-info v-for="(i, index) in 3" :key="index" @go-detail="goDetail">
         <div class="buttom-btn" v-if="index===0">
           <button class="pay pay-cancel btn">取消申请</button>
@@ -38,6 +40,20 @@
       @confirm="acceptConditions"
     ></van-dialog>
 
+    <!-- <van-actionsheet v-model="showTypes">
+      <van-picker :columns="columns" @change="onChange" />
+    </van-actionsheet> -->
+    <!-- 待修改 -->
+    <!-- <van-actionsheet
+      v-model="showTypes"
+      :actions="columns"
+      cancel-text="取消"
+      @select="onSelect"
+      @cancel="showTypes = false"
+    >
+      <van-picker :columns="columns" />
+    </van-actionsheet> -->
+
   </div>
 </template>
 <script>
@@ -56,12 +72,10 @@ export default {
   },
   data () {
     return {
-      // activeTabs: 0,
-      // tabsList: ['待支付', '审批中', '会议列表'],
-      // activeStepList: ['核实信息', '市场评定', '审批完成'],
-      // activeStep: 1,
       showConditions: false,
-      message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内'
+      message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内',
+      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
+      showTypes: false
     }
   },
   created () {},
@@ -78,6 +92,9 @@ export default {
     // 支付保证金
     payDeposit () {
       this.$router.push('/pay-deposit')
+    },
+    onSelect (value) {
+      console.log(value)
     }
   }
 }
