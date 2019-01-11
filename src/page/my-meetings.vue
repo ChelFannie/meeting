@@ -18,9 +18,11 @@
 
             <meeting-info v-if="index===1" @go-detail="goDetail">
               <div slot="container">
-                <van-steps :active="activeStep">
+
+                <!-- <van-steps :active="activeStep">
                   <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
-                </van-steps>
+                </van-steps> -->
+                <i-steps :active-step="activeStep" :active-step-list="activeStepList"></i-steps>
               </div>
               <div class="bottom-btn audit-btn">
                 <button class="audit btn">申请退款</button>
@@ -59,13 +61,15 @@
 <script>
 import IHeader from '../components/i-header'
 import IFooter from '../components/i-footer'
+import ISteps from '../components/i-steps'
 import MeetingInfo from '../components/meeting-info'
 export default {
   name: 'my-meetings',
   components: {
     IHeader,
     MeetingInfo,
-    IFooter
+    IFooter,
+    ISteps
   },
   data () {
     return {
@@ -164,53 +168,6 @@ export default {
       height: 80px;
       line-height: 80px;
     }
-
-    /* 进度样式 */
-    .van-steps--horizontal{
-      padding: 0 30px 30px;
-      .van-steps__items.van-steps__items--alone{
-        padding-top: 0;
-      }
-      .van-steps__items{
-        padding-bottom: 60px;
-        margin: 0;
-      }
-      .van-step--horizontal:last-child .van-step__circle-container{
-        right: -11px;
-      }
-      .van-step__circle{
-        width: 10px;
-        height: 10px;
-      }
-      .van-step__title{
-        font-size: 24px;
-        position: relative;
-        top: 55px;
-      }
-      .van-step__line{
-        height: 6px;
-        background-color: rgba(153,153,153);
-      }
-      .van-step--finish{
-        color: #3FB6FA;
-        .van-step__circle,
-        .van-step__line{
-          background-color: #3FB6FA;
-        }
-      }
-      .van-step .van-icon{
-        font-size: 20px;
-      }
-      .van-step--process{
-        .van-step__title{
-          color: #3FB6FA!important;
-        }
-        .van-icon-checked{
-          color: #3FB6FA!important;
-        }
-      }
-    }
-    /* 进度样式 */
   }
 }
 </style>
