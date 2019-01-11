@@ -14,10 +14,9 @@
       </div>
     </div>
 
-    <div class="bottom">
-      <i-footer text="取消会议" @show="showTips = true"></i-footer>
-    </div>
-
+    <i-footer>
+      <button class="btn" @click="showTips = true">取消会议</button>
+    </i-footer>
     <!-- 申请会议条款 -->
     <van-dialog
       v-model="showTips"

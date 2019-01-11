@@ -57,10 +57,16 @@
         />
       </div>
 
-      <div class="apply-bottom">
+      <!-- <div class="apply-bottom">
         <button class="cancel apply-btn">取消</button>
         <button class="confirm apply-btn" @click="applyCommit">确认</button>
-      </div>
+      </div> -->
+      <i-footer>
+        <!-- <div class="apply-bottom"> -->
+          <button class="cancel apply-btn">取消</button>
+          <button class="confirm apply-btn" @click="applyCommit">确认</button>
+        <!-- </div> -->
+      </i-footer>
     </div>
 
     <div v-else>选择头像
@@ -83,13 +89,16 @@
 <script>
 import IHeader from '../components/i-header'
 import IFiled from '../components/i-filed'
+import IFooter from '../components/i-footer'
 import {addressObj} from '../utils/address.js'
 import formatDateTime from '../utils/formateDate.js'
+
 export default {
   name: 'apply-meeting',
   components: {
     IHeader,
-    IFiled
+    IFiled,
+    IFooter
   },
   data () {
     return {
@@ -221,14 +230,18 @@ export default {
       this.showConfirm = true
     },
     // 提交会议申请
-    applyMeeting () {}
+    applyMeeting () {
+      this.$router.push('/pay-deposit')
+    }
   }
 }
 </script>
 <style lang="less">
 .apply-meeting{
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  padding: 90px 0 140px;
+  box-sizing: border-box;
   .apply-content{
     width: 100%;
     // 调整单元格样式
@@ -312,8 +325,8 @@ export default {
       border-bottom: 1px solid #f2f2f2;
     }
   }
-  .apply-bottom{
-    padding: 40px 0;
+  .i-footer{
+    padding: 25px 0;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -323,7 +336,7 @@ export default {
       width: 300px;
       border-radius:10px;
       color: #fff;
-      font-size:32px;
+      font-size: 32px;
     }
     .cancel{
       background: rgba(204,204,204);

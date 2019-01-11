@@ -1,6 +1,6 @@
 <template>
   <div class="i-footer">
-    <button class="btn" @click="show">{{text}}</button>
+    <slot></slot>
   </div>
 </template>
 <script>
@@ -28,6 +28,7 @@ export default {
 </script>
 <style lang="less">
 .i-footer{
+  width: 100%;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -40,6 +41,7 @@ export default {
     height: 90px;
     color: #fff;
     border-radius: 10px;
+    font-size: 32px;
     background-color: #3FB6FA;
   }
 }
