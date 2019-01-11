@@ -1,5 +1,6 @@
 <template>
   <div class="i-steps">
+    <div v-if="meetingStatus" class="text">当前状态：{{meetingStatus}}</div>
     <van-steps :active="activeStep">
       <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
     </van-steps>
@@ -9,6 +10,10 @@
 export default {
   name: 'i-steps',
   props: {
+    meetingStatus: {
+      type: String,
+      default: ''
+    },
     activeStep: {
       type: Number,
       default: 0
@@ -30,6 +35,11 @@ export default {
 </script>
 <style lang="less">
 .i-steps{
+  .text{
+    font-size: 32px;
+    color: #333333;
+    text-align: center;
+  }
   .van-steps--horizontal{
     padding: 0 30px 30px;
     .van-steps__items.van-steps__items--alone{

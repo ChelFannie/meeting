@@ -3,8 +3,15 @@
     <i-header text="会议详情"></i-header>
 
     <div class="content">
-      <i-filed :fieldLists="fieldLists" :meetingContents="meetingContents"></i-filed>
-
+      <div class="ceils">
+        <i-filed :fieldLists="fieldLists" :meetingContents="meetingContents"></i-filed>
+      </div>
+      <div class="steps">
+        <i-steps
+          :active-step="activeStep"
+          :active-step-list="activeStepList"
+          meeting-status="预约中"></i-steps>
+      </div>
     </div>
 
     <div class="bottom">
@@ -30,13 +37,15 @@
 import IHeader from '../components/i-header'
 import IFiled from '../components/i-filed'
 import IFooter from '../components/i-footer'
+import ISteps from '../components/i-steps'
 
 export default {
   name: 'meeting-detail',
   components: {
     IHeader,
     IFiled,
-    IFooter
+    IFooter,
+    ISteps
   },
   data () {
     return {
@@ -63,7 +72,11 @@ export default {
       ],
       // 展示取消会议提示框
       showTips: false,
-      message: '因自身原因取消会议需3个工作日审核，审核通过可退还保证金!'
+      message: '因自身原因取消会议需3个工作日审核，审核通过可退还保证金!',
+      // 预约当前进度
+      activeStep: 2,
+      // 预约进度
+      activeStepList: ['申请预约', '核实信息', '市场评定', '审批完成']
     }
   },
   created () {},
@@ -89,6 +102,12 @@ export default {
     .van-field{
       &:nth-of-type(4) {
         margin-bottom: 20px;
+      }
+    }
+    .steps{
+      margin-top: 40px;
+      .van-steps{
+        background-color: #f7f7f7;
       }
     }
   }

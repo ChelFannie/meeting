@@ -18,10 +18,6 @@
 
             <meeting-info v-if="index===1" @go-detail="goDetail">
               <div slot="container">
-
-                <!-- <van-steps :active="activeStep">
-                  <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
-                </van-steps> -->
                 <i-steps :active-step="activeStep" :active-step-list="activeStepList"></i-steps>
               </div>
               <div class="bottom-btn audit-btn">
