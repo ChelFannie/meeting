@@ -1,12 +1,14 @@
 <template>
   <div class="my-meetings">
-    <i-header text="我的会议"></i-header>
-
+    <i-header text="我的会议">
+      <div class="status-line" @click="showStatus = true">
+        <span>{{meetingStatus || '全部'}}</span>
+        <van-icon name="arrow-down" />
+      </div>
+    </i-header>
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
     <div v-if="true" class="tabs-main">
-      <div @click="showTypes = true">选择</div>
-
       <meeting-info v-for="(i, index) in 3" :key="index" @go-detail="goDetail">
         <div class="buttom-btn" v-if="index===0">
           <button class="pay pay-cancel btn">取消申请</button>
@@ -40,19 +42,14 @@
       @confirm="acceptConditions"
     ></van-dialog>
 
-    <!-- <van-actionsheet v-model="showTypes">
-      <van-picker :columns="columns" @change="onChange" />
-    </van-actionsheet> -->
-    <!-- 待修改 -->
-    <!-- <van-actionsheet
-      v-model="showTypes"
-      :actions="columns"
-      cancel-text="取消"
-      @select="onSelect"
-      @cancel="showTypes = false"
-    >
-      <van-picker :columns="columns" />
-    </van-actionsheet> -->
+    <!-- 展示状态选择 -->
+    <van-actionsheet v-model="showStatus">
+      <van-picker
+        :columns="columns"
+        show-toolbar
+        @cancel="showStatus = false"
+        @confirm="selectStatus" />
+    </van-actionsheet>
 
   </div>
 </template>
@@ -72,10 +69,14 @@ export default {
   },
   data () {
     return {
+      // 条款标志
       showConditions: false,
+      // 条款内容
       message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内',
-      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
-      showTypes: false
+      columns: ['全部', '预约中', '已预约', '预约失败', '已结束', '退款中', '已退款', '审核不通过'],
+      // 状态标志
+      showStatus: false,
+      meetingStatus: ''
     }
   },
   created () {},
@@ -93,8 +94,9 @@ export default {
     payDeposit () {
       this.$router.push('/pay-deposit')
     },
-    onSelect (value) {
-      console.log(value)
+    selectStatus (value) {
+      this.showStatus = false
+      this.meetingStatus = value
     }
   }
 }
@@ -103,7 +105,7 @@ export default {
 .my-meetings{
   height: 100vh;
   width: 100%;
-  padding: 90px 0 140px;
+  padding: 168px 0 140px;
   box-sizing: border-box;
   .no-meeting{
     margin-top: 80px;
@@ -111,9 +113,24 @@ export default {
     text-align: center;
     color: #333333;
   }
+  .status-line{
+    height: 80px;
+    line-height: 80px;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    font-size:32px;
+    .van-icon{
+      margin-left: 10px;
+      top: 4px;
+    }
+  }
+
   .tabs-main{
     height: 100%;
     overflow: scroll;
+    padding-top: 20px;
+    box-sizing: border-box;
     .meeting-info{
       background: #fff;
       margin-bottom: 20px;
@@ -184,6 +201,22 @@ export default {
     //   }
     // }
   }
+  // .van-picker__toolbar{
+  //   height: 80px;
+  //   line-height: 80px;
+  // }
+  // .van-picker__cancel, .van-picker__confirm{
+  //   font-size: 28px;
+  // }
+  // .van-picker__cancel{
+  //   color: #ccc;
+  // }
+  // .van-picker-column__item{
+  //   font-size: 24px;
+  // }
+  // .van-picker-column__item--selected{
+  //   font-size: 28px;
+  // }
   // .tab-item{
   //   background: #fff;
   //   .bottom-btn{

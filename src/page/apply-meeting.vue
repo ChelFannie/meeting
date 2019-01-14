@@ -251,24 +251,23 @@ export default {
         margin-bottom: 20px;
       }
     }
-    .van-picker__toolbar{
-      height: 80px;
-      line-height: 80px;
-    }
-    .van-picker__cancel, .van-picker__confirm{
-      font-size: 28px;
-    }
-    .van-picker__cancel{
-      color: #ccc;
-    }
-    .van-picker-column__item{
-      font-size: 24px;
-    }
-    .van-picker-column__item--selected{
-      font-size: 28px;
-    }
+    // .van-picker__toolbar{
+    //   height: 80px;
+    //   line-height: 80px;
+    // }
+    // .van-picker__cancel, .van-picker__confirm{
+    //   font-size: 28px;
+    // }
+    // .van-picker__cancel{
+    //   color: #ccc;
+    // }
+    // .van-picker-column__item{
+    //   font-size: 24px;
+    // }
+    // .van-picker-column__item--selected{
+    //   font-size: 28px;
+    // }
     .cel-date{
-      // padding: 32px 30px 31px;
       padding-left: 30px;
       font-size: 28px;
       background: #ffffff;

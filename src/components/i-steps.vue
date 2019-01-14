@@ -2,7 +2,10 @@
   <div class="i-steps">
     <div v-if="meetingStatus" class="text">当前状态：{{meetingStatus}}</div>
     <van-steps :active="activeStep">
-      <van-step v-for="(step, index) in activeStepList" :key="index">{{step}}</van-step>
+      <van-step v-for="(step, index) in activeStepList" :key="index">
+        <p>{{step}}</p>
+        <p>2018.01.01</p>
+      </van-step>
     </van-steps>
   </div>
 </template>
