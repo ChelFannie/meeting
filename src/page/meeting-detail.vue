@@ -15,6 +15,10 @@
 
     <i-footer>
       <button class="btn" @click="showTips = true">取消会议</button>
+      <!-- <div class="cancel-btn">
+        <button class="examine btn">重新审批</button>
+        <button class="cancel btn">取消会议</button>
+      </div> -->
     </i-footer>
 
     <!-- 申请会议条款 -->
@@ -85,6 +89,7 @@ export default {
       this.$toast.success({
         message: '取消成功'
       })
+      this.$router.push('/my-meetings')
     }
   }
 }
@@ -93,6 +98,8 @@ export default {
 .meeting-detail{
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 140px;
+  box-sizing: border-box;
   .content{
     width: 100%;
     // 调整单元格样式
@@ -105,6 +112,16 @@ export default {
       margin-top: 40px;
       .van-steps{
         background-color: #f7f7f7;
+      }
+    }
+  }
+  .i-footer{
+    .cancel-btn{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .btn{
+        width: 250px;
       }
     }
   }

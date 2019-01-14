@@ -33,12 +33,13 @@ export default {
   left: 0;
   bottom: 0;
   padding: 25px 30px;
+  box-sizing: border-box;
   background: #fff;
   box-shadow:0px -1px 8px 0px rgba(0, 0, 0, 0.1);
   z-index: 2;
   .btn{
-    width: 690px;
-    height: 90px;
+    width: 100%;
+    padding: 24px 0 24px;
     color: #fff;
     border-radius: 10px;
     font-size: 32px;

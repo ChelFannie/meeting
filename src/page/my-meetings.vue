@@ -11,18 +11,18 @@
 
     <div v-if="true" class="tabs-main">
       <meeting-info v-for="(i, index) in 3" :key="index" @go-detail="goDetail">
+
         <div class="buttom-btn" v-if="index===0">
-          <button class="pay pay-cancel btn">取消申请</button>
-          <button class="pay btn" @click="payDeposit">支付保证金</button>
+          <span class="list-status">会议状态：预约中</span>
+          <button class="btn" @click="payDeposit">支付保证金</button>
         </div>
 
         <div class="buttom-btn audit-btn" v-if="index===1">
-          <button class="audit btn">申请退款</button>
+          <span class="list-status">会议状态：预约中</span>
         </div>
 
         <div class="buttom-btn" v-if="index===2">
           <span class="list-status">会议状态：已结束</span>
-          <button class="audit btn">申请退款</button>
         </div>
       </meeting-info>
     </div>
@@ -144,37 +144,18 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        .list-status{
+          font-size: 32px;
+        }
         .btn{
           color:rgba(255,255,255);
           font-size: 32px;
           border-radius: 10px;
           text-align: center;
           background: #3FB6FA;
+          padding: 15px;
         }
-        .pay{
-          width: 320px;
-          height: 90px;
-          line-height: 90px;
-        }
-        .pay-cancel{
-          background: #CCCCCC;
-        }
-        .list-status{
-          height: 80px;
-          line-height: 80px;
-        }
-      }
-      .audit-btn{
-        padding: 20px 30px;
-        justify-content: flex-end;
-      }
-      .list{
-        justify-content: space-between;
-      }
-      .audit{
-        width: 160px;
-        height: 80px;
-        line-height: 80px;
       }
     }
   }
