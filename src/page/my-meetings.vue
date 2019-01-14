@@ -2,7 +2,7 @@
   <div class="my-meetings">
     <i-header text="我的会议">
       <div class="status-line" @click="showStatus = true">
-        <span>{{meetingStatus || '全部'}}</span>
+        <span>{{meetingStatus}}</span>
         <van-icon name="arrow-down" />
       </div>
     </i-header>
@@ -76,7 +76,7 @@ export default {
       columns: ['全部', '预约中', '已预约', '预约失败', '已结束', '退款中', '已退款', '审核不通过'],
       // 状态标志
       showStatus: false,
-      meetingStatus: ''
+      meetingStatus: '全部'
     }
   },
   created () {},
@@ -175,86 +175,6 @@ export default {
         line-height: 80px;
       }
     }
-    // margin-bottom: 120px;
-    // .van-tabs--line{
-    //   padding-top: 100px;
-    // }
-    // .van-tabs--line .van-tabs__wrap{
-    //   height: 80px;
-    // }
-    // .van-hairline--top-bottom:after{
-    //   border: none;
-    // }
-    // .van-tabs__nav{
-    //   align-items: center;
-    //   .van-tabs__line{
-    //     background-color: rgba(43,166,236);
-    //   }
-    //   .van-tab{
-    //     font-size: 32px;
-    //     color:rgba(153,153,153);
-    //   }
-    //   .van-tab--active{
-    //     span{
-    //       color:rgba(43,166,236);
-    //     }
-    //   }
-    // }
   }
-  // .van-picker__toolbar{
-  //   height: 80px;
-  //   line-height: 80px;
-  // }
-  // .van-picker__cancel, .van-picker__confirm{
-  //   font-size: 28px;
-  // }
-  // .van-picker__cancel{
-  //   color: #ccc;
-  // }
-  // .van-picker-column__item{
-  //   font-size: 24px;
-  // }
-  // .van-picker-column__item--selected{
-  //   font-size: 28px;
-  // }
-  // .tab-item{
-  //   background: #fff;
-  //   .bottom-btn{
-  //     padding: 20px 30px;
-  //     display: flex;
-  //     flex-direction: row;
-  //     justify-content: space-between;
-  //     .btn{
-  //       color:rgba(255,255,255);
-  //       font-size: 32px;
-  //       border-radius: 10px;
-  //       text-align: center;
-  //       background: #3FB6FA;
-  //     }
-  //     .pay{
-  //       width: 320px;
-  //       height: 90px;
-  //       line-height: 90px;
-  //     }
-  //     .pay-cancel{
-  //       background: #CCCCCC;
-  //     }
-  //     .list-status{
-  //       height: 80px;
-  //       line-height: 80px;
-  //     }
-  //   }
-  //   .audit-btn{
-  //     justify-content: flex-end;
-  //   }
-  //   .list{
-  //     justify-content: space-between;
-  //   }
-  //   .audit{
-  //     width: 160px;
-  //     height: 80px;
-  //     line-height: 80px;
-  //   }
-  // }
 }
 </style>
