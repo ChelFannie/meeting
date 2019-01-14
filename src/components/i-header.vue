@@ -31,7 +31,6 @@ export default {
   background: #fff;
   width: 100%;
   font-size: 0;
-  // box-shadow: 1px 5px 1.067vw 0 rgba(0,0,0,.1);
   .top{
     width: 100%;
     height: 88px;

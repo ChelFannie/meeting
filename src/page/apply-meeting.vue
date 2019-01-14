@@ -1,76 +1,65 @@
 <template>
   <div class="apply-meeting">
-    <div v-if="!selectLecturer">
-      <i-header text="申请会议"></i-header>
+    <i-header text="申请会议"></i-header>
 
-      <div class="apply-content">
-        <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
-        <div class="cel-date">
-          <div class="cel-data-main">
-            <span class="date-label">会议时间</span>
-            <div class="date-content">
-              <input
-                v-model="startDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="开始时间"
-                @click="showDate('startDate')" />
-              <span class="date-interval">—</span>
-              <input
-                v-model="endDate"
-                readonly
-                class="date-input"
-                type="text"
-                placeholder="结束时间"
-                @click="showDate('endDate')" />
-            </div>
+    <div class="apply-content">
+      <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
+      <div class="cel-date">
+        <div class="cel-data-main">
+          <span class="date-label">会议时间</span>
+          <div class="date-content">
+            <input
+              v-model="startDate"
+              readonly
+              class="date-input"
+              type="text"
+              placeholder="开始时间"
+              @click="showDate('startDate')" />
+            <span class="date-interval">—</span>
+            <input
+              v-model="endDate"
+              readonly
+              class="date-input"
+              type="text"
+              placeholder="结束时间"
+              @click="showDate('endDate')" />
           </div>
         </div>
-        <i-filed :fieldLists="fieldListsAfter" :meetingContents="meetingContents" @select="showSelectArea"></i-filed>
-
-        <!-- 地址选择器 -->
-        <van-actionsheet v-model="showAddressEdit">
-          <van-area
-            :area-list="areaList"
-            @confirm="selectArea"
-            @cancel="showAddressEdit = false" />
-        </van-actionsheet>
-
-        <!-- 时间选择器 -->
-        <van-actionsheet v-model="showDateEdit">
-          <van-datetime-picker
-            type="date"
-            :min-date="minDate"
-            @confirm="selectCurrentDate"
-            @cancel="showDateEdit = false"
-          />
-        </van-actionsheet>
-
-        <!-- 会议性质选择 -->
-        <van-actionsheet
-          v-model="showNature"
-          :actions="natureActions"
-          cancel-text="取消"
-          @select="onSelect"
-          @cancel="showNature = false"
-        />
       </div>
+      <i-filed :fieldLists="fieldListsAfter" :meetingContents="meetingContents" @select="showSelectArea"></i-filed>
 
-      <!-- <div class="apply-bottom">
-        <button class="cancel apply-btn">取消</button>
-        <button class="confirm apply-btn" @click="applyCommit">确认</button>
-      </div> -->
-      <i-footer>
-        <!-- <div class="apply-bottom"> -->
-          <button class="cancel apply-btn">取消</button>
-          <button class="confirm apply-btn" @click="applyCommit">确认</button>
-        <!-- </div> -->
-      </i-footer>
+      <!-- 地址选择器 -->
+      <van-actionsheet v-model="showAddressEdit">
+        <van-area
+          :area-list="areaList"
+          @confirm="selectArea"
+          @cancel="showAddressEdit = false" />
+      </van-actionsheet>
+
+      <!-- 时间选择器 -->
+      <van-actionsheet v-model="showDateEdit">
+        <van-datetime-picker
+          type="date"
+          :min-date="minDate"
+          @confirm="selectCurrentDate"
+          @cancel="showDateEdit = false"
+        />
+      </van-actionsheet>
+
+      <!-- 会议性质选择 -->
+      <van-actionsheet
+        v-model="showNature"
+        :actions="natureActions"
+        cancel-text="取消"
+        @select="onSelect"
+        @cancel="showNature = false"
+      />
     </div>
 
-    <div v-else>选择头像
-    </div>
+    <i-footer>
+      <button class="cancel apply-btn">取消</button>
+      <button class="confirm apply-btn" @click="applyCommit">确认</button>
+    </i-footer>
 
     <!-- 提交申请提示框 -->
     <van-dialog
@@ -139,7 +128,6 @@ export default {
       showDateEdit: false,
       // 时间选择器的起始时间
       minDate: new Date(),
-      // maxDate: new Date(2019, 10, 1),
       // 开始时间
       startDate: '',
       // 结束时间
@@ -158,8 +146,8 @@ export default {
       // 提交申请提示框
       showConfirm: false,
       confirmApplyMsg: '确认信息无误后将提交申请',
-      // 展示选择讲师
-      selectLecturer: false
+      // 讲师名字
+      lecturerName: ''
     }
   },
   watch: {
@@ -198,7 +186,7 @@ export default {
       } else if (vModle === 'nature') {
         this.showNature = true
       } else if (vModle === 'lecturer') {
-        this.selectLecturer = true
+        this.$router.push('/select-lecturer')
       }
     },
     // 选中地址
@@ -240,10 +228,12 @@ export default {
 .apply-meeting{
   width: 100%;
   height: 100vh;
-  padding: 90px 0 140px;
+  padding: 88px 0 140px;
   box-sizing: border-box;
   .apply-content{
     width: 100%;
+    // height: 100%;
+    // overflow: scroll;
     // 调整单元格样式
     .van-field{
       &:nth-of-type(3),
@@ -251,6 +241,7 @@ export default {
         margin-bottom: 20px;
       }
     }
+    // 会议时间样式
     .cel-date{
       padding-left: 30px;
       font-size: 28px;
@@ -308,6 +299,8 @@ export default {
       border-bottom: 1px solid #f2f2f2;
     }
   }
+
+  // 底部
   .i-footer{
     padding: 25px 0;
     display: flex;
@@ -327,6 +320,13 @@ export default {
     .confirm{
       background: rgba(63,182,250);
     }
+  }
+
+  // 讲师选择
+  .van-popup{
+    width: 100%;
+    max-height: 0;
+    min-height: 100%;
   }
 }
 </style>

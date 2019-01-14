@@ -6,6 +6,7 @@
         <van-icon name="arrow-down" />
       </div>
     </i-header>
+
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
     <div v-if="true" class="tabs-main">
@@ -127,6 +128,7 @@ export default {
   }
 
   .tabs-main{
+    width: 100%;
     height: 100%;
     overflow: scroll;
     padding-top: 20px;

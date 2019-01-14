@@ -21,7 +21,8 @@ import {
   Steps,
   Toast,
   Picker,
-  Popup
+  Popup,
+  Search
 } from 'vant'
 
 Vue.use(Button)
@@ -37,6 +38,7 @@ Vue.use(Step).use(Steps)
 Vue.use(Toast)
 Vue.use(Picker)
 Vue.use(Popup)
+Vue.use(Search)
 
 // 路由全局守卫
 // router.beforeEach((to, from, next) => {
