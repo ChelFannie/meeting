@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+    '$route' (newVal, oldValue) {
+      document.title = newVal.name
+    }
+  }
 }
 </script>
 

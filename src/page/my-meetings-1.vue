@@ -1,6 +1,5 @@
 <template>
   <div class="my-meetings">
-    <i-header text="我的会议" @back="back"></i-header>
 
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
@@ -57,7 +56,6 @@
   </div>
 </template>
 <script>
-import IHeader from '../components/i-header'
 import IFooter from '../components/i-footer'
 import ISteps from '../components/i-steps'
 import MeetingInfo from '../components/meeting-info'
@@ -65,7 +63,6 @@ import MeetingInfo from '../components/meeting-info'
 export default {
   name: 'my-meetings',
   components: {
-    IHeader,
     MeetingInfo,
     IFooter,
     ISteps

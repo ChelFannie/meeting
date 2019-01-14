@@ -1,9 +1,9 @@
 <template>
   <div class="i-header">
-    <div class="top">
+    <!-- <div class="top">
       <van-icon @click="back" name="arrow-left"/>
       <span class="top-text">{{text}}</span>
-    </div>
+    </div> -->
     <slot></slot>
   </div>
 </template>

@@ -1,6 +1,5 @@
 <template>
   <div class="meeting-detail">
-    <i-header text="会议详情"></i-header>
 
     <div class="content">
       <div class="ceils">
@@ -34,7 +33,6 @@
   </div>
 </template>
 <script>
-import IHeader from '../components/i-header'
 import IFiled from '../components/i-filed'
 import IFooter from '../components/i-footer'
 import ISteps from '../components/i-steps'
@@ -42,7 +40,6 @@ import ISteps from '../components/i-steps'
 export default {
   name: 'meeting-detail',
   components: {
-    IHeader,
     IFiled,
     IFooter,
     ISteps

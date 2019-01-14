@@ -21,19 +21,19 @@ export default new Router({
       component: Home
     }, {
       path: '/apply-meeting',
-      name: 'apply-meeting',
+      name: '申请会议',
       component: ApplyMeeting
     }, {
       path: '/my-meetings',
-      name: 'my-meetings',
+      name: '我的会议',
       component: MyMeetings
     }, {
       path: '/meeting-detail',
-      name: 'meeting-detail',
+      name: '会议详情',
       component: MeetingDetail
     }, {
       path: '/pay-deposit',
-      name: 'pay-deposit',
+      name: '支付保证金',
       component: PayDeposit
     }, {
       path: '/demo',

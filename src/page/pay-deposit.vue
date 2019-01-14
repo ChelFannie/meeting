@@ -1,6 +1,5 @@
 <template>
   <div class="pay-deposit">
-    <i-header text="支付保证金" @back="back"></i-header>
 
     <div class="content">
       <meeting-info class="meeting-info" :icon="false"></meeting-info>
@@ -18,13 +17,11 @@
   </div>
 </template>
 <script>
-import IHeader from '../components/i-header'
 import MeetingInfo from '../components/meeting-info'
 
 export default {
   name: 'pay-deposit',
   components: {
-    IHeader,
     MeetingInfo
   },
   data () {

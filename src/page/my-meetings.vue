@@ -1,6 +1,6 @@
 <template>
   <div class="my-meetings">
-    <i-header text="我的会议" @back="back">
+    <i-header>
       <div class="status-line" @click="showStatus = true">
         <span>{{meetingStatus}}</span>
         <van-icon name="arrow-down" />
@@ -74,7 +74,7 @@ export default {
       showConditions: false,
       // 条款内容
       message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内',
-      columns: ['全部', '预约中', '已预约', '预约失败', '已结束', '退款中', '已退款', '审核不通过'],
+      columns: ['全部', '预约中', '已预约', '预约失败', '审批不通过', '会议进行中', '会议结束', '退款中', '已退款'],
       // 状态标志
       showStatus: false,
       meetingStatus: '全部'
@@ -83,9 +83,6 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    back () {
-      this.$router.go(-1)
-    },
     // 接受条款
     acceptConditions () {
       this.$router.push('/apply-meeting')
@@ -109,7 +106,7 @@ export default {
 .my-meetings{
   height: 100vh;
   width: 100%;
-  padding: 168px 0 140px;
+  padding: 80px 0 140px;
   box-sizing: border-box;
   .no-meeting{
     margin-top: 80px;

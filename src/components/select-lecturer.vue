@@ -1,6 +1,6 @@
 <template>
   <div class="select-lecturer">
-    <i-header text="讲师选择" @back="back">
+    <i-header>
       <van-search placeholder="搜索" v-model="lecturerName" />
     </i-header>
     <div class="content">
@@ -37,9 +37,6 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    back () {
-      this.$emit('lecturerBack')
-    },
     select (lecturer) {
       this.$emit('selectItem', lecturer)
     }

@@ -1,6 +1,5 @@
 <template>
   <div class="apply-meeting">
-    <i-header text="申请会议" @back="back"></i-header>
 
     <div class="apply-content">
       <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
@@ -63,7 +62,7 @@
 
     <!-- 显示讲师选择 -->
     <van-popup v-model="lectureShow" position="right" :overlay="false">
-      <select-lecturer @selectItem="selectLecturer" @lecturerBack="lecturerBack"></select-lecturer>
+      <select-lecturer @selectItem="selectLecturer"></select-lecturer>
     </van-popup>
 
     <!-- 提交申请提示框 -->
@@ -81,7 +80,6 @@
   </div>
 </template>
 <script>
-import IHeader from '../components/i-header'
 import IFiled from '../components/i-filed'
 import IFooter from '../components/i-footer'
 import {addressObj} from '../utils/address.js'
@@ -91,7 +89,6 @@ import SelectLecturer from '../components/select-lecturer'
 export default {
   name: 'apply-meeting',
   components: {
-    IHeader,
     IFiled,
     IFooter,
     SelectLecturer
@@ -186,9 +183,6 @@ export default {
     })
   },
   methods: {
-    back () {
-      this.$router.go(-1)
-    },
     // 展示选中列表
     showSelectArea (vModle) {
       if (vModle === 'address') {
@@ -212,9 +206,6 @@ export default {
     selectLecturer (lecturer) {
       this.lectureShow = false
       this.meetingContents.lecturer = lecturer.name
-    },
-    lecturerBack () {
-      this.lectureShow = false
     },
     // 选择时间
     selectCurrentDate (selectDate) {
@@ -246,7 +237,7 @@ export default {
 .apply-meeting{
   width: 100%;
   height: 100vh;
-  padding: 88px 0 140px;
+  padding-bottom: 140px;
   box-sizing: border-box;
   .apply-content{
     width: 100%;
