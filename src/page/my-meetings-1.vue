@@ -1,6 +1,6 @@
 <template>
   <div class="my-meetings">
-    <i-header text="我的会议"></i-header>
+    <i-header text="我的会议" @back="back"></i-header>
 
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
@@ -83,6 +83,9 @@ export default {
   created () {},
   mounted () {},
   methods: {
+    back () {
+      this.$router.go(-1)
+    },
     // 接受条款
     acceptConditions () {
       this.$router.push('/apply-meeting')

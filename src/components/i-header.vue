@@ -1,7 +1,7 @@
 <template>
   <div class="i-header">
     <div class="top">
-      <van-icon @click="$router.go(-1)" name="arrow-left"/>
+      <van-icon @click="back" name="arrow-left"/>
       <span class="top-text">{{text}}</span>
     </div>
     <slot></slot>
@@ -19,7 +19,11 @@ export default {
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    back () {
+      this.$emit('back')
+    }
+  }
 }
 </script>
 <style lang="less">

@@ -5,7 +5,7 @@ const ApplyMeeting = () => import('../page/apply-meeting')
 const MyMeetings = () => import('../page/my-meetings')
 const MeetingDetail = () => import('../page/meeting-detail')
 const PayDeposit = () => import('../page/pay-deposit')
-const SelectLecturer = () => import('../page/select-lecturer')
+// const SelectLecturer = () => import('../page/select-lecturer')
 const Demo = () => import('../page/demo')
 
 Vue.use(Router)
@@ -35,10 +35,6 @@ export default new Router({
       path: '/pay-deposit',
       name: 'pay-deposit',
       component: PayDeposit
-    }, {
-      path: '/select-lecturer',
-      name: 'select-lecturer',
-      component: SelectLecturer
     }, {
       path: '/demo',
       name: 'demo',

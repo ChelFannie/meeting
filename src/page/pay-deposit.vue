@@ -1,6 +1,6 @@
 <template>
   <div class="pay-deposit">
-    <i-header text="支付保证金"></i-header>
+    <i-header text="支付保证金" @back="back"></i-header>
 
     <div class="content">
       <meeting-info class="meeting-info" :icon="false"></meeting-info>
@@ -34,7 +34,11 @@ export default {
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    back () {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 <style lang="less">

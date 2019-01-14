@@ -1,6 +1,6 @@
 <template>
   <div class="apply-meeting">
-    <i-header text="申请会议"></i-header>
+    <i-header text="申请会议" @back="back"></i-header>
 
     <div class="apply-content">
       <i-filed :fieldLists="fieldListBefore" :meetingContents="meetingContents"></i-filed>
@@ -61,6 +61,11 @@
       <button class="confirm apply-btn" @click="applyCommit">确认</button>
     </i-footer>
 
+    <!-- 显示讲师选择 -->
+    <van-popup v-model="lectureShow" position="right" :overlay="false">
+      <select-lecturer @selectItem="selectLecturer" @lecturerBack="lecturerBack"></select-lecturer>
+    </van-popup>
+
     <!-- 提交申请提示框 -->
     <van-dialog
       v-model="showConfirm"
@@ -81,13 +86,15 @@ import IFiled from '../components/i-filed'
 import IFooter from '../components/i-footer'
 import {addressObj} from '../utils/address.js'
 import formatDateTime from '../utils/formateDate.js'
+import SelectLecturer from '../components/select-lecturer'
 
 export default {
   name: 'apply-meeting',
   components: {
     IHeader,
     IFiled,
-    IFooter
+    IFooter,
+    SelectLecturer
   },
   data () {
     return {
@@ -146,8 +153,8 @@ export default {
       // 提交申请提示框
       showConfirm: false,
       confirmApplyMsg: '确认信息无误后将提交申请',
-      // 讲师名字
-      lecturerName: ''
+      // 显示讲师选择项目
+      lectureShow: false
     }
   },
   watch: {
@@ -179,6 +186,9 @@ export default {
     })
   },
   methods: {
+    back () {
+      this.$router.go(-1)
+    },
     // 展示选中列表
     showSelectArea (vModle) {
       if (vModle === 'address') {
@@ -186,7 +196,7 @@ export default {
       } else if (vModle === 'nature') {
         this.showNature = true
       } else if (vModle === 'lecturer') {
-        this.$router.push('/select-lecturer')
+        this.lectureShow = true
       }
     },
     // 选中地址
@@ -197,6 +207,14 @@ export default {
       })
       this.meetingContents.address = addressStr
       this.showAddressEdit = false
+    },
+    // 选中讲师
+    selectLecturer (lecturer) {
+      this.lectureShow = false
+      this.meetingContents.lecturer = lecturer.name
+    },
+    lecturerBack () {
+      this.lectureShow = false
     },
     // 选择时间
     selectCurrentDate (selectDate) {

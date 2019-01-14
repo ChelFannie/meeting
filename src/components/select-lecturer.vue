@@ -1,17 +1,14 @@
 <template>
   <div class="select-lecturer">
-    <i-header text="讲师选择">
+    <i-header text="讲师选择" @back="back">
       <van-search placeholder="搜索" v-model="lecturerName" />
     </i-header>
     <div class="content">
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
-      <div class="content-lecture"></div>
+      <div class="content-lecture" v-for="(lecturer, index) in lectureLists" :key="index">
+        <img class="lecture-img" :src="lecturer.imgSrc" alt="">
+        <p class="lecture-name">{{lecturer.name}}</p>
+        <button class="lecture-select" @click="select(lecturer)">选择</button>
+      </div>
     </div>
   </div>
 </template>
@@ -26,12 +23,27 @@ export default {
   data () {
     return {
       // 讲师名字
-      lecturerName: ''
+      lecturerName: '',
+      lectureLists: [
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌1'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌2'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌3'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌4'}
+      ]
     }
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    back () {
+      this.$emit('lecturerBack')
+    },
+    select (lecturer) {
+      this.$emit('selectItem', lecturer)
+    }
+  }
 }
 </script>
 <style lang="less">
@@ -79,8 +91,30 @@ export default {
       border-radius: 10px;
       margin-right: 30px;
       margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 35px 0;
+      box-sizing: border-box;
       &:nth-of-type(2n){
         margin-right: 0;
+      }
+      .lecture-img{
+        width:260px;
+        height:260px;
+      }
+      .lecture-name{
+        font-size:32px;
+        color: #333;
+        padding: 10px 0;
+      }
+      .lecture-select{
+        width:260px;
+        height:60px;
+        background:rgba(43,169,241,1);
+        border-radius:10px;
+        color: #fff;
+        font-size:32px;
       }
     }
   }

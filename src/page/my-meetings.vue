@@ -1,6 +1,6 @@
 <template>
   <div class="my-meetings">
-    <i-header text="我的会议">
+    <i-header text="我的会议" @back="back">
       <div class="status-line" @click="showStatus = true">
         <span>{{meetingStatus}}</span>
         <van-icon name="arrow-down" />
@@ -83,6 +83,9 @@ export default {
   created () {},
   mounted () {},
   methods: {
+    back () {
+      this.$router.go(-1)
+    },
     // 接受条款
     acceptConditions () {
       this.$router.push('/apply-meeting')
