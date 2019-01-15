@@ -4,7 +4,7 @@
     <van-steps :active="activeStep">
       <van-step v-for="(step, index) in activeStepList" :key="index">
         <p>{{step}}</p>
-        <p>2018.01.01</p>
+        <p class="audit-date">2018.01.01</p>
       </van-step>
     </van-steps>
   </div>
@@ -32,7 +32,12 @@ export default {
     }
   },
   created () {},
-  mounted () {},
+  mounted () {
+    if (this.meetingStatus === '审核不通过') {
+      document.getElementsByClassName('van-step--process')[0].getElementsByClassName('van-icon')[0].classList.remove('van-icon-checked')
+      document.getElementsByClassName('van-step--process')[0].getElementsByClassName('van-icon')[0].classList.add('van-icon-clear')
+    }
+  },
   methods: {}
 }
 </script>
@@ -46,14 +51,19 @@ export default {
   .van-steps--horizontal{
     padding: 0 30px 30px;
     .van-steps__items.van-steps__items--alone{
-      padding-top: 0;
+      // padding-top: 0;
+      padding-top: 40px;
     }
     .van-steps__items{
-      padding-bottom: 60px;
+      // padding-bottom: 60px;
+      padding-bottom: 30px;
       margin: 0;
     }
     .van-step--horizontal:last-child .van-step__circle-container{
       right: -11px;
+    }
+    .van-step--horizontal .van-step__circle-container{
+      background-color: #f7f7f7;
     }
     .van-step__circle{
       width: 10px;
@@ -62,7 +72,12 @@ export default {
     .van-step__title{
       font-size: 24px;
       position: relative;
-      top: 55px;
+      top: 60px;
+      text-align: right;
+      .audit-date{
+        position: relative;
+        bottom: 115px;
+      }
     }
     .van-step__line{
       height: 6px;
@@ -76,7 +91,7 @@ export default {
       }
     }
     .van-step .van-icon{
-      font-size: 20px;
+      font-size: 24px;
     }
     .van-step--process{
       .van-step__title{
@@ -84,6 +99,9 @@ export default {
       }
       .van-icon-checked{
         color: #3FB6FA!important;
+      }
+      .van-icon-clear{
+        color: #999!important;
       }
     }
   }

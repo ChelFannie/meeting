@@ -1,7 +1,7 @@
 <template>
   <div class="select-lecturer">
     <i-header>
-      <van-search placeholder="搜索" v-model="lecturerName" />
+      <van-search placeholder="搜索" v-model="lecturerName" show-action />
     </i-header>
     <div class="content">
       <div class="content-lecture" v-for="(lecturer, index) in lectureLists" :key="index">
@@ -47,17 +47,18 @@ export default {
 .select-lecturer{
   height: 100vh;
   width: 100%;
-  padding-top: 188px;
+  padding-top: 108px;
   box-sizing: border-box;
   .i-header{
     box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.1);
     .van-search{
       padding: 17px 30px;
+      padding-right: 0;
       background-color: #fff!important;
       .van-cell{
         padding: 0;
         padding-left: 20px;
-        padding-right: 10px;
+        padding-right: 20px;
         box-sizing: border-box;
         background-color: #F2F2F2;
         height: 66px;
@@ -67,6 +68,10 @@ export default {
         align-items: center;
         font-size: 28px;
         color: #999;
+      }
+      .van-search__action{
+        font-size: 28px;
+        padding: 16px 30px;
       }
       .van-icon{
         font-size: 32px;

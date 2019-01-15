@@ -9,7 +9,7 @@
         <i-steps
           :active-step="activeStep"
           :active-step-list="activeStepList"
-          meeting-status="预约中"></i-steps>
+          meeting-status="审核不通过"></i-steps>
       </div>
     </div>
 

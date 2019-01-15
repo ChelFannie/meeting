@@ -10,20 +10,28 @@
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
     <div v-if="true" class="tabs-main">
-      <meeting-info v-for="(i, index) in 3" :key="index" @go-detail="goDetail">
+      <meeting-info
+        v-for="(i, index) in columnsLists"
+        :key="index"
+        @go-detail="goDetail"
+      >
 
-        <div class="buttom-btn" v-if="index===0">
+        <div class="buttom-btn">
+          <span class="list-status">会议状态：{{i}}</span>
+          <button class="btn" v-if="i==='预约中'" @click="payDeposit">支付保证金</button>
+        </div>
+        <!-- <div class="buttom-btn" v-if="index===0">
           <span class="list-status">会议状态：预约中</span>
           <button class="btn" @click="payDeposit">支付保证金</button>
-        </div>
+        </div> -->
 
-        <div class="buttom-btn audit-btn" v-if="index===1">
+        <!-- <div class="buttom-btn audit-btn" v-if="index===1">
           <span class="list-status">会议状态：预约中</span>
-        </div>
+        </div> -->
 
-        <div class="buttom-btn" v-if="index===2">
+        <!-- <div class="buttom-btn" v-if="index===2">
           <span class="list-status">会议状态：已结束</span>
-        </div>
+        </div> -->
       </meeting-info>
     </div>
 
@@ -77,8 +85,38 @@ export default {
       columns: ['全部', '预约中', '已预约', '预约失败', '审批不通过', '会议进行中', '会议结束', '退款中', '已退款'],
       // 状态标志
       showStatus: false,
-      meetingStatus: '全部'
+      meetingStatus: '全部',
+      columnsLists: []
     }
+  },
+  watch: {},
+  // 监听组件内路由守卫
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (from.name === '会议详情') {
+        vm.meetingStatus = localStorage.getItem('meetingStatus')
+        if (vm.meetingStatus !== '全部') {
+          vm.columns.map((item, index) => {
+            if (index > 0 && (item === localStorage.getItem('meetingStatus'))) {
+              vm.columnsLists.push(item)
+            }
+          })
+        } else {
+          vm.columns.map((item, index) => {
+            if (index > 0) {
+              vm.columnsLists.push(item)
+            }
+          })
+        }
+      } else {
+        localStorage.setItem('meetingStatus', vm.meetingStatus)
+        vm.columns.map((item, index) => {
+          if (index > 0) {
+            vm.columnsLists.push(item)
+          }
+        })
+      }
+    })
   },
   created () {},
   mounted () {},
@@ -96,8 +134,21 @@ export default {
       this.$router.push('/pay-deposit')
     },
     selectStatus (value) {
+      localStorage.setItem('meetingStatus', value)
       this.showStatus = false
       this.meetingStatus = value
+      if (value !== '全部') {
+        this.columnsLists = []
+        this.columns.map(item => {
+          if (item === value) {
+            this.columnsLists.push(item)
+          }
+        })
+      } else {
+        this.columns.map(item => {
+          this.columnsLists.push(item)
+        })
+      }
     }
   }
 }
@@ -136,9 +187,9 @@ export default {
     .meeting-info{
       background: #fff;
       margin-bottom: 20px;
-      &:last-child{
-        margin-bottom: 0;
-      }
+      // &:last-child{
+      //   margin-bottom: 0;
+      // }
       .buttom-btn{
         padding: 20px 30px;
         display: flex;

@@ -56,7 +56,7 @@
     </div>
 
     <i-footer>
-      <button class="cancel apply-btn">取消</button>
+      <button class="cancel apply-btn" @click="cancelApply">取消</button>
       <button class="confirm apply-btn" @click="applyCommit">确认</button>
     </i-footer>
 
@@ -221,6 +221,10 @@ export default {
     onSelect (item) {
       this.meetingContents.nature = item.name
       this.showNature = false
+    },
+    // 取消会议申请
+    cancelApply () {
+      this.$router.push('/my-meetings')
     },
     // 验证并确认会议申请
     applyCommit () {
