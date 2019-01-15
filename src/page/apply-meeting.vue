@@ -40,6 +40,7 @@
         <van-datetime-picker
           type="date"
           :min-date="minDate"
+          :max-date="maxDate"
           @confirm="selectCurrentDate"
           @cancel="showDateEdit = false"
         />
@@ -96,9 +97,9 @@ export default {
   data () {
     return {
       meetingContents: {
-        username: '',
-        tel: '',
-        wechat: '',
+        username: '李白',
+        tel: '18689421636',
+        wechat: '18689421636',
         startDate: '',
         endDate: '',
         address: '',
@@ -132,6 +133,7 @@ export default {
       showDateEdit: false,
       // 时间选择器的起始时间
       minDate: new Date(),
+      maxDate: new Date(new Date().getFullYear() + 10, 11, 31),
       // 开始时间
       startDate: '',
       // 结束时间
@@ -155,17 +157,27 @@ export default {
     }
   },
   watch: {
+    // 设置时间选择器的起始时间
     startOrEndDate: {
       handler: function (val) {
         if (val === 'startDate') {
+          // 如果已经选择了结束时间，则开始时间的可选区域为当前时间到结束时间之间
           this.minDate = new Date()
+          if (this.meetingContents['endDate']) {
+            let date = this.meetingContents['endDate'].split('/')
+            this.maxDate = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]))
+          } else {
+            this.maxDate = new Date(new Date().getFullYear() + 10, 11, 31)
+          }
         } else if (val === 'endDate') {
+          // 如果已经选择了开始时间，则结束时间的起始时间为开始时间
           if (this.meetingContents['startDate']) {
             let date = this.meetingContents['startDate'].split('/')
             this.minDate = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]))
           } else {
             this.minDate = new Date()
           }
+          this.maxDate = new Date(new Date().getFullYear() + 10, 11, 31)
         }
       },
       deep: true
