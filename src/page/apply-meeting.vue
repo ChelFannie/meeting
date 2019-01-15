@@ -66,6 +66,15 @@
       <select-lecturer @selectItem="selectLecturer"></select-lecturer>
     </van-popup>
 
+    <!-- 信息未填写完整提示 -->
+    <van-dialog
+      v-model="showTips"
+      closeOnClickOverlay
+      message="信息未填写完整!"
+      confirm-button-text="确认"
+      @confirm="showTips = false"
+    ></van-dialog>
+
     <!-- 提交申请提示框 -->
     <van-dialog
       v-model="showConfirm"
@@ -153,7 +162,9 @@ export default {
       showConfirm: false,
       confirmApplyMsg: '确认信息无误后将提交申请',
       // 显示讲师选择项目
-      lectureShow: false
+      lectureShow: false,
+      // 申请会议信息是否填写完整
+      showTips: false
     }
   },
   watch: {
@@ -240,7 +251,17 @@ export default {
     },
     // 验证并确认会议申请
     applyCommit () {
-      this.showConfirm = true
+      let flag = true
+      Object.keys(this.meetingContents).map(keys => {
+        if (keys !== 'detailAddress') {
+          !this.meetingContents[keys] && (flag = false)
+        }
+      })
+      if (flag) {
+        this.showConfirm = true
+        return
+      }
+      this.showTips = true
     },
     // 提交会议申请
     applyMeeting () {
