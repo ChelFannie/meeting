@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition :name="transitionName">
+      <navigation>
+        <router-view></router-view>
+      </navigation>
+    </transition>
   </div>
 </template>
 
@@ -11,6 +15,19 @@ export default {
     '$route' (newVal, oldValue) {
       document.title = newVal.name
     }
+  },
+  data () {
+    return {
+      transitionName: 'fade'
+    }
+  },
+  created () {
+    this.$navigation.on('forward', () => {
+      this.transitionName = 'pageRight'
+    })
+    this.$navigation.on('back', () => {
+      this.transitionName = 'pageLeft'
+    })
   }
 }
 </script>
@@ -34,7 +51,7 @@ li{
   list-style: none;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000;
