@@ -119,7 +119,13 @@ export default {
     })
   },
   created () {},
-  mounted () {},
+  mounted () {
+    this.columns.map((item, index) => {
+      if (index > 0) {
+        this.columnsLists.push(item)
+      }
+    })
+  },
   methods: {
     // 接受条款
     acceptConditions () {
