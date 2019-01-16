@@ -278,12 +278,11 @@ export default {
   box-sizing: border-box;
   .apply-content{
     width: 100%;
-    // height: 100%;
-    // overflow: scroll;
+    height: 100%;
+    overflow: scroll;
     // 调整单元格样式
     .van-field{
-      &:nth-of-type(3),
-      &:nth-of-type(6) {
+      &:nth-of-type(3n) {
         margin-bottom: 20px;
       }
     }

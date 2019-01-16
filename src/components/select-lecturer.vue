@@ -1,7 +1,14 @@
 <template>
   <div class="select-lecturer">
     <i-header>
-      <van-search placeholder="搜索" v-model="lecturerName" show-action />
+      <form action="/">
+        <van-search
+          placeholder="搜索"
+          v-model="lecturerName"
+          show-action
+          @search="onSearch"
+          @cancel="onCancel" />
+      </form>
     </i-header>
     <div class="content">
       <div class="content-lecture" v-for="(lecturer, index) in lectureLists" :key="index">
@@ -39,6 +46,12 @@ export default {
   methods: {
     select (lecturer) {
       this.$emit('selectItem', lecturer)
+    },
+    onSearch () {
+      console.log(222)
+    },
+    onCancel () {
+      console.log(1)
     }
   }
 }

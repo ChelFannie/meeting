@@ -9,31 +9,38 @@
 
     <div v-if="false" class="no-meeting">还没有预约会议哦！</div>
 
-    <div v-if="true" class="tabs-main">
-      <meeting-info
-        v-for="(i, index) in columnsLists"
-        :key="index"
-        @go-detail="goDetail"
-      >
+    <i-scroll
+      :data="columnsLists"
+      :probe-type="probeType"
+      :listen-scroll="listenScroll"
+      class="list"
+      ref="list">
+      <div v-if="true" class="tabs-main">
+        <meeting-info
+          v-for="(i, index) in columnsLists"
+          :key="index"
+          @go-detail="goDetail"
+        >
 
-        <div class="buttom-btn">
-          <span class="list-status">会议状态：{{i}}</span>
-          <button class="btn" v-if="i==='预约中'" @click="payDeposit">支付保证金</button>
-        </div>
-        <!-- <div class="buttom-btn" v-if="index===0">
-          <span class="list-status">会议状态：预约中</span>
-          <button class="btn" @click="payDeposit">支付保证金</button>
-        </div> -->
+          <div class="buttom-btn">
+            <span class="list-status">会议状态：{{i}}</span>
+            <button class="btn" v-if="i==='预约中'" @click="payDeposit">支付保证金</button>
+          </div>
+          <!-- <div class="buttom-btn" v-if="index===0">
+            <span class="list-status">会议状态：预约中</span>
+            <button class="btn" @click="payDeposit">支付保证金</button>
+          </div> -->
 
-        <!-- <div class="buttom-btn audit-btn" v-if="index===1">
-          <span class="list-status">会议状态：预约中</span>
-        </div> -->
+          <!-- <div class="buttom-btn audit-btn" v-if="index===1">
+            <span class="list-status">会议状态：预约中</span>
+          </div> -->
 
-        <!-- <div class="buttom-btn" v-if="index===2">
-          <span class="list-status">会议状态：已结束</span>
-        </div> -->
-      </meeting-info>
-    </div>
+          <!-- <div class="buttom-btn" v-if="index===2">
+            <span class="list-status">会议状态：已结束</span>
+          </div> -->
+        </meeting-info>
+      </div>
+    </i-scroll>
 
     <i-footer>
       <button class="btn" @click="showConditions = true">申请会议</button>
@@ -67,6 +74,7 @@ import IHeader from '../components/i-header'
 import IFooter from '../components/i-footer'
 import ISteps from '../components/i-steps'
 import MeetingInfo from '../components/meeting-info'
+import IScroll from '../components/i-scroll'
 
 export default {
   name: 'my-meetings',
@@ -74,7 +82,8 @@ export default {
     IHeader,
     MeetingInfo,
     IFooter,
-    ISteps
+    ISteps,
+    IScroll
   },
   data () {
     return {
@@ -86,7 +95,9 @@ export default {
       // 状态标志
       showStatus: false,
       meetingStatus: '全部',
-      columnsLists: []
+      columnsLists: [],
+      probeType: 3,
+      listenScroll: true
     }
   },
   watch: {},
@@ -186,12 +197,18 @@ export default {
     }
   }
 
+  .list{
+    position: fixed;
+    top: 100px;
+    bottom: 160px;
+    width: 100%;
+  }
   .tabs-main{
     width: 100%;
-    height: 100%;
-    overflow: scroll;
-    padding-top: 20px;
-    box-sizing: border-box;
+    // height: 100%;
+    // overflow: scroll;
+    // padding-top: 20px;
+    // box-sizing: border-box;
     .meeting-info{
       background: #fff;
       margin-bottom: 20px;

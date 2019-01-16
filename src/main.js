@@ -8,10 +8,10 @@ import Es6Promise from 'es6-promise'
 import './init'
 import store from './store'
 
-import Navigation from 'vue-navigation'
-Vue.use(Navigation, {
-  router
-})
+// import Navigation from 'vue-navigation'
+// Vue.use(Navigation, {
+//   router
+// })
 
 Vue.config.productionTip = false
 Es6Promise.polyfill() // 解决低版本安卓内核和ie浏览器显示空白页面

@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <transition :name="transitionName">
-      <keep-alive>
-        <navigation>
+    <!-- <transition :name="transitionName"> -->
+      <keep-alive include="/apply-meeting">
+        <!-- <navigation> -->
           <router-view></router-view>
-        </navigation>
+        <!-- </navigation> -->
       </keep-alive>
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -20,16 +20,16 @@ export default {
   },
   data () {
     return {
-      transitionName: 'fade'
+      // transitionName: 'fade'
     }
   },
   created () {
-    this.$navigation.on('forward', () => {
-      this.transitionName = 'pageRight'
-    })
-    this.$navigation.on('back', () => {
-      this.transitionName = 'pageLeft'
-    })
+    // this.$navigation.on('forward', () => {
+    //   this.transitionName = 'pageRight'
+    // })
+    // this.$navigation.on('back', () => {
+    //   this.transitionName = 'pageLeft'
+    // })
   }
 }
 </script>
