@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <transition :name="transitionName">
-      <navigation>
-        <router-view></router-view>
-      </navigation>
+      <keep-alive>
+        <navigation>
+          <router-view></router-view>
+        </navigation>
+      </keep-alive>
     </transition>
   </div>
 </template>

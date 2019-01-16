@@ -43,18 +43,18 @@ let removePending = (config, cancleHandle) => {
 
 // axios请求拦截器
 instance.interceptors.request.use((config) => {
-    config.cancelToken = new CancelToken((c) => {
-      removePending(config, c)
-    })
-    config.headers.token = `${store.state.token}`
-    if (config.method === 'post' && config.headers['Content-Type'] !== 'application/json') {
-      config.data = qs.stringify(config.data) // stringify POST方式提交的数据
-    }
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
+  config.cancelToken = new CancelToken((c) => {
+    removePending(config, c)
   })
+  config.headers.token = `${store.state.token}`
+  if (config.method === 'post' && config.headers['Content-Type'] !== 'application/json') {
+    config.data = qs.stringify(config.data) // stringify POST方式提交的数据
+  }
+  return config
+},
+(error) => {
+  return Promise.reject(error)
+})
 
 // axios响应拦截器
 instance.interceptors.response.use((response) => {

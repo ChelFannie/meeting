@@ -114,7 +114,7 @@ export default {
         address: '',
         detailAddress: '',
         nature: '',
-        message: '',
+        instructions: '',
         numbers: '',
         lecturer: ''
       },
@@ -126,7 +126,7 @@ export default {
         {vModle: 'address', type: 'text', label: '会议地点', placeholder: '请选择会议地点', icon: 'arrow', readonly: true},
         {vModle: 'detailAddress', type: 'textarea', label: '详细地址', placeholder: '可选填', icon: '', readonly: false},
         {vModle: 'nature', type: 'text', label: '会议性质', placeholder: '请选择会议性质', icon: 'arrow', readonly: true},
-        {vModle: 'message', type: 'textarea', label: '会议情况', placeholder: '请详细输入会议背景情况', icon: '', readonly: false},
+        {vModle: 'instructions', type: 'textarea', label: '会议情况', placeholder: '请详细输入会议背景情况', icon: '', readonly: false},
         {vModle: 'numbers', type: 'number', label: '参会人数', placeholder: '请输入参会人数', icon: '', readonly: false},
         {vModle: 'lecturer', type: 'text', label: '讲师选择', placeholder: '请选择讲师', icon: 'arrow', readonly: true}
       ],

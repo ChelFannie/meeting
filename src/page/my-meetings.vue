@@ -82,7 +82,7 @@ export default {
       showConditions: false,
       // 条款内容
       message: '条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内容条款内',
-      columns: ['全部', '预约中', '已预约', '预约失败', '审批不通过', '会议进行中', '会议结束', '退款中', '已退款'],
+      columns: ['全部', '预约中', '已预约', '预约失败', '审批不通过', '会议进行中', '会议结束', '退款中', '已退款', '退款失败'],
       // 状态标志
       showStatus: false,
       meetingStatus: '全部',
@@ -120,6 +120,7 @@ export default {
   },
   created () {},
   mounted () {
+    // 首次进入
     this.columns.map((item, index) => {
       if (index > 0) {
         this.columnsLists.push(item)
@@ -139,6 +140,7 @@ export default {
     payDeposit () {
       this.$router.push('/pay-deposit')
     },
+    // 会议状态的选择
     selectStatus (value) {
       localStorage.setItem('meetingStatus', value)
       this.showStatus = false

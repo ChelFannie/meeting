@@ -6,19 +6,33 @@
         <i-filed :fieldLists="fieldLists" :meetingContents="meetingContents"></i-filed>
       </div>
       <div class="steps">
+        <div class="steps-text">当前状态：{{meetingStatus}}</div>
         <i-steps
           :active-step="activeStep"
           :active-step-list="activeStepList"
-          meeting-status="审核不通过"></i-steps>
+          :meeting-status="meetingStatus"
+          progress-text="(审批进度)"></i-steps>
+        <p class="steps-text reason-text">原因：取消会议</p>
+        <i-steps
+          :active-step="1"
+          :active-step-list="reimburseList"
+          progress-text="(退款进度)"></i-steps>
+        <p class="steps-text reason-text">原因：拒绝退款</p>
       </div>
     </div>
 
     <i-footer>
-      <button class="btn" @click="showTips = true">取消会议</button>
+      <!-- 任何途中都可以取消会议 -->
+      <!-- <button class="btn" @click="showTips = true">取消会议</button> -->
+
+      <!-- 审核不通过时，可以重新审批 -->
       <!-- <div class="cancel-btn">
-        <button class="examine btn">重新审批</button>
-        <button class="cancel btn">取消会议</button>
+        <button class="cancel btn" @click="showTips = true">取消会议</button>
+        <button class="examine btn" @click="$router.push('/apply-meeting')">重新审批</button>
       </div> -->
+
+      <!-- 退款途中可以重新申请 -->
+      <button class="btn" @click="$router.push('/apply-meeting')">重新申请</button>
     </i-footer>
 
     <!-- 申请会议条款 -->
@@ -56,7 +70,7 @@ export default {
         address: '广东省 广州市 海珠区',
         detailAddress: '琶洲国际会展中心',
         nature: '招商会',
-        message: '准备举行一个招商会',
+        instructions: '准备举行一个招商会',
         numbers: '300',
         lecturer: '大斌'
       },
@@ -67,7 +81,7 @@ export default {
         {vModle: 'address', type: 'text', label: '会议地点', placeholder: '', icon: '', readonly: true},
         {vModle: 'detailAddress', type: 'textarea', label: '详细地址', placeholder: '', icon: '', readonly: true},
         {vModle: 'nature', type: 'text', label: '会议性质', placeholder: '', icon: '', readonly: true},
-        {vModle: 'message', type: 'textarea', label: '会议情况', placeholder: '', icon: '', readonly: true},
+        {vModle: 'instructions', type: 'textarea', label: '会议情况', placeholder: '', icon: '', readonly: true},
         {vModle: 'numbers', type: 'number', label: '参会人数', placeholder: '', icon: '', readonly: true},
         {vModle: 'lecturer', type: 'text', label: '讲师选择', placeholder: '', icon: '', readonly: true}
       ],
@@ -76,8 +90,12 @@ export default {
       message: '因自身原因取消会议需3个工作日审核，审核通过可退还保证金!',
       // 预约当前进度
       activeStep: 2,
-      // 预约进度
-      activeStepList: ['申请预约', '核实信息', '市场评定', '审批完成']
+      // 预约审核进度
+      activeStepList: ['申请预约', '核实信息', '市场评定', '审批完成'],
+      // 退款进度
+      reimburseList: ['取消会议', '核实信息', '市场评定', '退款完成'],
+      // 当前状态
+      meetingStatus: '审核不通过'
     }
   },
   created () {},
@@ -109,7 +127,18 @@ export default {
       }
     }
     .steps{
-      margin-top: 40px;
+      // margin-top: 40px;
+      padding: 0 30px;
+      .steps-text{
+        padding: 40px 0;
+        font-size: 32px;
+        color: #333333;
+        text-align: center;
+      }
+      .reason-text{
+        font-size: 28px;
+        text-align: left;
+      }
       .van-steps{
         background-color: #f7f7f7;
       }
@@ -119,9 +148,12 @@ export default {
     .cancel-btn{
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
       .btn{
         width: 250px;
+      }
+      .cancel{
+        background-color: #ccc;
       }
     }
   }
