@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <transition :name="transitionName"> -->
-      <keep-alive include="/apply-meeting">
+      <keep-alive>
         <!-- <navigation> -->
           <router-view></router-view>
         <!-- </navigation> -->
