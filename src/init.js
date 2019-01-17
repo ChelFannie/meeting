@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import './style/index.less'
-// import 'vant/lib/index.css'
-// import Vant from 'vant'
-// Vue.use(Vant)
-// import router from './router'
-// import store from './store'
+
 import {
   Button,
   Dialog,
@@ -24,6 +20,13 @@ import {
   Popup,
   Search
 } from 'vant'
+// import 'vant/lib/index.css'
+// import Vant from 'vant'
+// Vue.use(Vant)
+// import router from './router'
+// import store from './store'
+
+require('./utils/vconsole')
 
 Vue.use(Button)
 Vue.use(Dialog)

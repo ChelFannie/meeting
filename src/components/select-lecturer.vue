@@ -1,6 +1,6 @@
 <template>
   <div class="select-lecturer">
-    <i-header>
+    <div class="top">
       <form action="/">
         <van-search
           placeholder="搜索"
@@ -9,7 +9,7 @@
           @search="onSearch"
           @cancel="onCancel" />
       </form>
-    </i-header>
+    </div>
     <div class="content">
       <div class="content-lecture" v-for="(lecturer, index) in lectureLists" :key="index">
         <img class="lecture-img" :src="lecturer.imgSrc" alt="">
@@ -20,12 +20,12 @@
   </div>
 </template>
 <script>
-import IHeader from '../components/i-header'
+// import IHeader from '../components/i-header'
 
 export default {
   name: 'select-lecturer',
   components: {
-    IHeader
+    // IHeader
   },
   data () {
     return {
@@ -48,10 +48,10 @@ export default {
       this.$emit('selectItem', lecturer)
     },
     onSearch () {
-      console.log(222)
+      this.$emit('onSearch', this.lecturerName)
     },
     onCancel () {
-      console.log(1)
+      this.$emit('onCancel')
     }
   }
 }
@@ -60,9 +60,15 @@ export default {
 .select-lecturer{
   height: 100vh;
   width: 100%;
-  padding-top: 108px;
-  box-sizing: border-box;
-  .i-header{
+  overflow: auto;
+  .top{
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 1%;
+    background: #fff;
+    width: 100%;
+    font-size: 0;
     box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.1);
     .van-search{
       padding: 17px 30px;
@@ -74,17 +80,39 @@ export default {
         padding-right: 20px;
         box-sizing: border-box;
         background-color: #F2F2F2;
-        height: 66px;
         width: 100%;
-        display: flex;
+        display: inline-flex;
         flex-direction: row;
         align-items: center;
         font-size: 28px;
         color: #999;
       }
+      input::-webkit-input-placeholder{
+        padding-top: 5px;
+      }
+      input:-moz-placeholder{
+        padding-top: 5px;
+      }
+      input::-moz-placeholder{
+        padding-top: 5px;
+      }
+      input:-ms-input-placeholder{
+        padding-top: 5px;
+      }
+      .van-cell__value{
+        .van-field__body{
+          height: 66px;
+          width: 100%;
+        }
+      }
       .van-search__action{
         font-size: 28px;
         padding: 16px 30px;
+      }
+      .van-field__control{
+        font-size: 28px;
+        height: 100%;
+        line-height: 28px;
       }
       .van-icon{
         font-size: 32px;
@@ -92,8 +120,13 @@ export default {
     }
   }
   .content{
+    position: fixed;// 处理苹果兼容问题
+    z-index: 0;
     width: 100%;
-    margin: 30px 30px 0;
+    height: 100%;
+    padding-top: 128px;
+    padding: 128px 30px 0 30px;
+    overflow: scroll;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;

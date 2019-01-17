@@ -63,7 +63,7 @@
 
     <!-- 显示讲师选择 -->
     <van-popup v-model="lectureShow" position="right" :overlay="false">
-      <select-lecturer @selectItem="selectLecturer"></select-lecturer>
+      <select-lecturer @selectItem="selectLecturer" @onSearch="onSearch" @onCancel="onCancel"></select-lecturer>
     </van-popup>
 
     <!-- 信息未填写完整提示 -->
@@ -230,6 +230,15 @@ export default {
       this.lectureShow = false
       this.meetingContents.lecturer = lecturer.name
     },
+    // 搜索讲师
+    onSearch (lecturer) {
+      console.log(lecturer, 'lecturer')
+    },
+    // 从讲师选择页面返回
+    onCancel () {
+      this.lectureShow = false
+      console.log(3333333)
+    },
     // 选择时间
     selectCurrentDate (selectDate) {
       this.meetingContents[this.startOrEndDate] = formatDateTime(selectDate)
@@ -276,6 +285,7 @@ export default {
   height: 100vh;
   padding-bottom: 140px;
   box-sizing: border-box;
+
   .apply-content{
     width: 100%;
     height: 100%;
@@ -370,8 +380,10 @@ export default {
   // 讲师选择
   .van-popup{
     width: 100%;
-    max-height: 0;
-    min-height: 100%;
+    overflow: hidden;
+  }
+  .van-popup--right{
+    top: 49%
   }
 }
 </style>
