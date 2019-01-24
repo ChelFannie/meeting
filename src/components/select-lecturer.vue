@@ -37,6 +37,10 @@ export default {
         {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌2'},
         {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌3'},
         {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌4'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌2'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌3'},
+        {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌'},
         {imgSrc: require('../assets/lecturer.jpg'), name: '曾斌4'}
       ]
     }
@@ -60,7 +64,7 @@ export default {
 .select-lecturer{
   height: 100vh;
   width: 100%;
-  overflow: auto;
+  // overflow: auto;
   .top{
     position: fixed;
     z-index: 3000;
@@ -120,7 +124,7 @@ export default {
     }
   }
   .content{
-    position: fixed;// 处理苹果兼容问题
+    position: fixed;// 处理苹果兼容
     z-index: 0;
     width: 100%;
     height: 100%;

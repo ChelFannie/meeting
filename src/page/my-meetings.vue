@@ -13,8 +13,10 @@
       :data="columnsLists"
       :probe-type="probeType"
       :listen-scroll="listenScroll"
+      :pullup="pullup"
       class="list"
-      ref="list">
+      ref="list"
+      @scrollToEnd="showMoreList">
       <div v-if="true" class="tabs-main">
         <meeting-info
           v-for="(i, index) in columnsLists"
@@ -39,9 +41,9 @@
             <span class="list-status">会议状态：已结束</span>
           </div> -->
         </meeting-info>
+        <van-loading v-if="loadingShow" type="spinner" />
       </div>
     </i-scroll>
-
     <i-footer>
       <button class="btn" @click="showConditions = true">申请会议</button>
     </i-footer>
@@ -66,7 +68,6 @@
         @cancel="showStatus = false"
         @confirm="selectStatus" />
     </van-actionsheet>
-
   </div>
 </template>
 <script>
@@ -97,7 +98,9 @@ export default {
       meetingStatus: '全部',
       columnsLists: [],
       probeType: 3,
-      listenScroll: true
+      listenScroll: true,
+      pullup: true,
+      loadingShow: false
     }
   },
   watch: {},
@@ -168,6 +171,11 @@ export default {
           this.columnsLists.push(item)
         })
       }
+    },
+    // 上拉刷新
+    showMoreList () {
+      // this.loadingShow = true
+      console.log(2222222222)
     }
   }
 }
@@ -202,6 +210,12 @@ export default {
     top: 100px;
     bottom: 160px;
     width: 100%;
+    .van-loading{
+      width: 50px;
+      height: 50px;
+      left: 330px;
+      color: rgb(41, 38, 38) !important;
+    }
   }
   .tabs-main{
     width: 100%;

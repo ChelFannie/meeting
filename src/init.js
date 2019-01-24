@@ -18,7 +18,8 @@ import {
   Toast,
   Picker,
   Popup,
-  Search
+  Search,
+  Loading
 } from 'vant'
 // import 'vant/lib/index.css'
 // import Vant from 'vant'
@@ -26,7 +27,7 @@ import {
 // import router from './router'
 // import store from './store'
 
-require('./utils/vconsole')
+// require('./utils/vconsole')
 
 Vue.use(Button)
 Vue.use(Dialog)
@@ -42,6 +43,7 @@ Vue.use(Toast)
 Vue.use(Picker)
 Vue.use(Popup)
 Vue.use(Search)
+Vue.use(Loading)
 
 // 路由全局守卫
 // router.beforeEach((to, from, next) => {
