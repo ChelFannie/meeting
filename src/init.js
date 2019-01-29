@@ -1,5 +1,10 @@
 import Vue from 'vue'
 import './style/index.less'
+// import store from './store/index'
+
+// import {
+//   getCookie
+// } from './utils/getCookie'
 
 import {
   Button,
@@ -45,6 +50,17 @@ Vue.use(Popup)
 Vue.use(Search)
 Vue.use(Loading)
 
+// let cookieObj = getCookie()
+// if (cookieObj.robot_user_ID) {
+//   cookieObj.agentId = parseInt(cookieObj.robot_user_ID)
+//   store.commit('agentId', cookieObj.agentId)
+//   localStorage.setItem('agentId', cookieObj.agentId)
+// } else {
+//   Toast.fail({
+//     message: '未登陆'
+//   })
+// }
+// console.log(cookieObj)
 // 路由全局守卫
 // router.beforeEach((to, from, next) => {
 //   if (!to.meta.requireAuth) {

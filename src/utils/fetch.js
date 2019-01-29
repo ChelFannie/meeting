@@ -1,10 +1,14 @@
 import axios from 'axios'
 import qs from 'qs'
-import store from '../store/store'
+// import store from '../store/store'
+import store from '../store/index'
 import router from '../router'
+// import {
+//   Message
+// } from 'element-ui'
 import {
-  Message
-} from 'element-ui'
+  Toast
+} from 'vant'
 const BASE_URL = process.env.BASE_API // webpack识别开发或生产环境，自动匹配baseUrl
 const TIMEOUT_MILLISECONDS = 20000 // 超时链接
 
@@ -46,6 +50,11 @@ instance.interceptors.request.use((config) => {
   config.cancelToken = new CancelToken((c) => {
     removePending(config, c)
   })
+  // if (store.state.token) {
+  //   config.headers.token = `${store.state.token}`
+  // } else {
+  //   config.headers.token = ''
+  // }
   config.headers.token = `${store.state.token}`
   if (config.method === 'post' && config.headers['Content-Type'] !== 'application/json') {
     config.data = qs.stringify(config.data) // stringify POST方式提交的数据
@@ -89,14 +98,14 @@ instance.interceptors.response.use((response) => {
       break
     case 408:
       error.message = '请求超时(408)'
-      Message.error({
+      Toast.fail({
         message: '请求超时,请刷新后连接!'
         // center: true
       })
       break
     case 500:
       error.message = '服务器错误(500)'
-      Message.error({
+      Toast.fail({
         message: '服务器异常！'
         // center: true
       })
@@ -119,7 +128,7 @@ instance.interceptors.response.use((response) => {
       break
   }
   if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-    Message.error({
+    Toast.fail({
       message: '网络异常'
       // center: true
     })

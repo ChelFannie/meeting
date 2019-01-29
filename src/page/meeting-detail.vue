@@ -22,6 +22,7 @@
     </div>
 
     <i-footer>
+      <a class="back-zbyc" href="/Robot_jingxiaoshang/discover/do.php">智伴优创</a>
       <!-- 任何途中都可以取消会议 -->
       <!-- <button class="btn" @click="showTips = true">取消会议</button> -->
 

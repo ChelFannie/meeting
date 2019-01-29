@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  token: sessionStorage.getItem('token')
+  token: localStorage.getItem('token'),
+  agentId: localStorage.getItem('agentId')
 }
 
 const mutations = {
   token (state, param) {
     state.token = param
+  },
+  agentId (state, param) {
+    state.agentId = param
   }
 }
 

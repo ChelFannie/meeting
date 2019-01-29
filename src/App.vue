@@ -11,6 +11,9 @@
 </template>
 
 <script>
+import req from './api/login/login.js'
+import {getCookie} from './utils/getCookie.js'
+import md5 from 'js-md5'
 export default {
   name: 'App',
   watch: {
@@ -30,6 +33,38 @@ export default {
     // this.$navigation.on('back', () => {
     //   this.transitionName = 'pageLeft'
     // })
+    // req('login', {agentId: this.$store.state.agentId}).then(res => {
+    //   console.log(res, 'res')
+    // })
+  },
+  mounted () {
+    this.getAgentId()
+  },
+  methods: {
+    getAgentId () {
+      let cookieObj = getCookie()
+      if (!cookieObj.robot_user_ID) {
+        this.$toast.fail({
+          message: '未登陆'
+        })
+        return
+      }
+      cookieObj.agentId = parseInt(cookieObj.robot_user_ID)
+      this.$store.commit('agentId', cookieObj.agentId)
+      localStorage.setItem('agentId', cookieObj.agentId)
+      // let sign = `timestamp=${(new Date()).getTime()}&userId=${this.$store.state.agentId}&secretKey=zhibankeji`
+      let sign = `agentId=${this.$store.state.agentId}&timestamp=${(new Date()).getTime()}&secretKey=zhibankeji`
+      let params = {
+        // userId: this.$store.state.agentId,
+        agentId: this.$store.state.agentId,
+        timestamp: (new Date()).getTime(),
+        sign: md5(sign)
+      }
+      console.log(params, 'params')
+      req('login', params).then(res => {
+        console.log(res, 'res')
+      })
+    }
   }
 }
 </script>

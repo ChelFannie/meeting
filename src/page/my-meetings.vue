@@ -45,6 +45,7 @@
       </div>
     </i-scroll>
     <i-footer>
+      <a class="back-zbyc" href="/Robot_jingxiaoshang/discover/do.php">智伴优创</a>
       <button class="btn" @click="showConditions = true">申请会议</button>
     </i-footer>
 

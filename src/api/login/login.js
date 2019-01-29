@@ -1,13 +1,9 @@
 import request from '../index'
 const config = {
-// 登陆
+  // 获取token
   login: {
-    url: '/login/login.json',
-    method: 'post'
-  },
-  toggleLogin: {
-    url: '/login/auditorloginMonitor.json',
-    method: 'post'
+    url: '/auth',
+    method: 'get'
   }
 }
 

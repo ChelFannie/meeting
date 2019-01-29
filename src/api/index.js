@@ -1,6 +1,6 @@
 import fetch from '../utils/fetch'
 
-export default (function request() {
+export default (function request () {
   return function () {
     let args = Array.from(arguments)
     const config = args[0]

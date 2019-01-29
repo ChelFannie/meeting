@@ -57,6 +57,7 @@
     </div>
 
     <i-footer>
+      <a class="back-zbyc" href="/Robot_jingxiaoshang/discover/do.php">智伴优创</a>
       <button class="cancel apply-btn" @click="cancelApply">取消</button>
       <button class="confirm apply-btn" @click="applyCommit">确认</button>
     </i-footer>
