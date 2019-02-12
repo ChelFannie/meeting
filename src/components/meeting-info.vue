@@ -1,27 +1,29 @@
 <template>
   <div class="meeting-info">
-    <div class="top" @click="goDetail">
-      <p class="top-time">申请时间：2019-01-01 10:30:36</p>
-      <van-icon v-if="icon" name="arrow" />
-    </div>
-    <div class="container">
-      <div class="container-line">
-        <div class="container-line-item">
-          <p class="item-content">会议时间：2019/01/15 - 2019/01/16</p>
-          <p class="item-content">
-            <span>会议地点：广东省广州市</span>
-            <span>参会人数：300人</span>
-          </p>
-          <p class="item-content">
-            <span>会议性质：招商会</span>
-            <span>讲师：大斌</span>
-          </p>
+    <div class="list-item" v-for="(list, index) in columnsLists" :key="index">
+      <div class="top" @click="goDetail(list)">
+        <p class="top-time">申请时间：{{list.applicationTime}}</p>
+        <van-icon v-if="icon" name="arrow" />
+      </div>
+      <div class="container">
+        <div class="container-line">
+          <div class="container-line-item">
+            <p class="item-content">会议时间：{{list.meetingDate}}</p>
+            <p class="item-content">
+              <span>会议地点：{{list.regionalFullName}}</span>
+              <span>参会人数：{{list.participantsNumber}}人</span>
+            </p>
+            <p class="item-content">
+              <span>会议性质：{{list.meetingTypeWords}}</span>
+              <span>讲师：{{list.lecturer}}</span>
+            </p>
+          </div>
+
+          <slot name="container"></slot>
         </div>
 
-        <slot name="container"></slot>
+        <slot></slot>
       </div>
-
-      <slot></slot>
     </div>
   </div>
 </template>
@@ -32,6 +34,10 @@ export default {
     icon: {
       type: Boolean,
       default: true
+    },
+    columnsLists: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -40,14 +46,18 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    goDetail () {
-      this.$emit('go-detail')
+    goDetail (list) {
+      this.$emit('go-detail', list)
     }
   }
 }
 </script>
 <style lang="less">
 .meeting-info{
+  .list-item{
+    margin-bottom: 20px;
+    background: #fff;
+  }
   .top{
     position: relative;
     height: 88px;

@@ -18,29 +18,7 @@
       ref="list"
       @scrollToEnd="showMoreList">
       <div v-if="true" class="tabs-main">
-        <meeting-info
-          v-for="(i, index) in columnsLists"
-          :key="index"
-          @go-detail="goDetail"
-        >
-
-          <div class="buttom-btn">
-            <span class="list-status">会议状态：{{i}}</span>
-            <button class="btn" v-if="i==='预约中'" @click="payDeposit">支付保证金</button>
-          </div>
-          <!-- <div class="buttom-btn" v-if="index===0">
-            <span class="list-status">会议状态：预约中</span>
-            <button class="btn" @click="payDeposit">支付保证金</button>
-          </div> -->
-
-          <!-- <div class="buttom-btn audit-btn" v-if="index===1">
-            <span class="list-status">会议状态：预约中</span>
-          </div> -->
-
-          <!-- <div class="buttom-btn" v-if="index===2">
-            <span class="list-status">会议状态：已结束</span>
-          </div> -->
-        </meeting-info>
+        <meeting-info :columns-lists="columnsLists" @go-detail="goDetail"></meeting-info>
         <van-loading v-if="loadingShow" type="spinner" />
       </div>
     </i-scroll>
@@ -77,6 +55,7 @@ import IFooter from '../components/i-footer'
 import ISteps from '../components/i-steps'
 import MeetingInfo from '../components/meeting-info'
 import IScroll from '../components/i-scroll'
+import req from '../api/meeting/meeting.js'
 
 export default {
   name: 'my-meetings',
@@ -133,23 +112,50 @@ export default {
       }
     })
   },
-  created () {},
+  created () {
+    this.getMeetingsList()
+  },
   mounted () {
-    // 首次进入
-    this.columns.map((item, index) => {
-      if (index > 0) {
-        this.columnsLists.push(item)
-      }
-    })
   },
   methods: {
+    // 获取会议列表
+    getMeetingsList () {
+      let params = {
+        page: 1,
+        size: 3,
+        agentId: this.$store.state.agentId
+      }
+      let meetingType = {
+        'INVERSTMENT': '招商',
+        'GROUND_PROMOTION': '地推',
+        'SALON': '沙龙',
+        'INTERNAL_TRAINING': '内训'
+      }
+      req('applicationsLists', params)
+        .then(res => {
+          res.data.list.map(item => {
+            item.meetingStartTimeModify = item.meetingStartTime.split(' ')[0].split('-').join('/')
+            item.meetingFinishTimeModify = item.meetingFinishTime.split(' ')[0].split('-').join('/')
+            item.meetingDate = item.meetingStartTimeModify + ' - ' + item.meetingFinishTimeModify
+            item.meetingTypeWords = meetingType[item.meetingType]
+          })
+          this.columnsLists = res.data.list
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     // 接受条款
     acceptConditions () {
       this.$router.push('/apply-meeting')
     },
     // 会议详情页
-    goDetail () {
-      this.$router.push('/meeting-detail')
+    goDetail (list) {
+      // this.$router.push('/meeting-detail')
+      this.$router.push({
+        name: '会议详情',
+        params: {lists: list}
+      })
     },
     // 支付保证金
     payDeposit () {
@@ -220,16 +226,9 @@ export default {
   }
   .tabs-main{
     width: 100%;
-    // height: 100%;
-    // overflow: scroll;
-    // padding-top: 20px;
-    // box-sizing: border-box;
     .meeting-info{
-      background: #fff;
-      margin-bottom: 20px;
-      // &:last-child{
-      //   margin-bottom: 0;
-      // }
+      // background: #fff;
+      // margin-bottom: 20px;
       .buttom-btn{
         padding: 20px 30px;
         display: flex;
